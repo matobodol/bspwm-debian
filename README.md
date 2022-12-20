@@ -1,19 +1,19 @@
 # MY BSPWM SETUP
-## X11 minimal
+### X11 minimal
 ```bash
 xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-video-intel xserver-xorg-input-libinput 
 ```
-## Dependensi
+### Dependensi
 ```bash
 bspwm sxhkd rofi polybar dunst conky rxvt-unicode scrot i3lock feh neofetch imagemagick w3m xsettingsd cmus xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils xdg-user-dirs lxpolkit gvfs tar thunar
 ```
-## Optional
+### Optional
 ```bash
 firefox-esr geany vim mpv htop ranger
 ```
-## Compositor
+### Compositor
 > **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
-## Installing
+### Installing
 > **clone bspwm-debian dotfile**
 ```bash
 cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
@@ -38,7 +38,7 @@ cd .. && cp -rf . $HOME
 ```bash
 fc-cache -rv
 ```
-## Tap to click
+### Tap to click
 ```bash
 sudo cat > /etc/X11/xorg.conf.d/30-touchpad.conf <<EOF
 Section "InputClass"
@@ -51,7 +51,7 @@ Section "InputClass"
 EndSection
 EOF
 ```
-## Keybind
+### Keybind
 | Key                                                                     | Action                                  |
 | ----------------------------------------------------------------------- | --------------------------------------- |
 | <kbd>super + a                                                          | Switch to light/dark theme (Toggle)     |
