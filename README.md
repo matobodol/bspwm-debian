@@ -18,6 +18,26 @@ firefox-esr geany vim mpv htop ranger
 ## Compositor
 > **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
+## Installing
+```bash
+cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
+```
+```bash
+cd .icons && tar -Jxvf icon.tar.xz ; rm -f icon.tar.xz
+```
+```bash
+cd ../.themes && tar -Jxvf theme.tar.xz ; rm -f theme.tar.xz
+``
+```bash
+cd ../.fonts && tar -Jxvf font.tar.xz ; rm -f font.tar.xz
+```
+```bash
+cd .. && cp -rf . $HOME
+```
+```bash
+fc-cache -rv
+```
+
 ## Tap to click
 ```bash
 sudo cat > /etc/X11/xorg.conf.d/30-touchpad.conf <<EOF
