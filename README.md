@@ -9,12 +9,12 @@ xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-v
 
 * ### Dependensi
 ```bash
-bspwm sxhkd rofi polybar dunst conky rxvt-unicode scrot i3lock feh neofetch imagemagick w3m xsettingsd cmus xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils xdg-user-dirs lxpolkit gvfs tar thunar
+bspwm sxhkd rofi polybar dunst conky rxvt-unicode scrot i3lock feh neofetch imagemagick w3m xsettingsd cmus xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils xdg-user-dirs lxpolkit tar ranger
 ```
 
 * ### Optional
 ```bash
-firefox-esr geany vim mpv htop ranger
+firefox-esr geany vim mpv htop thunar gvfs
 ```
 
 * ### Compositor
