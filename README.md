@@ -13,5 +13,6 @@ bspwm sxhkd xdotool rxvt-unicode scrot i3lock feh htop neofetch imagemagick rofi
 ```
 
 > **Picom**
+\ **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
-**[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
+
