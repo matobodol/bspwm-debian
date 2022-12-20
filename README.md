@@ -25,9 +25,10 @@ firefox-esr geany vim mpv htop thunar gvfs
 ```bash
 cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
 ```
+```
 > **uncompress icons**
 ```bash
-cd .icons && tar -Jxvf icon.tar.xz ; rm -f icon.tar.xz
+cd bspwm-debian/.icons && tar -Jxvf icon.tar.xz ; rm -f icon.tar.xz
 ```
 > **uncompress themes**
 ```bash
