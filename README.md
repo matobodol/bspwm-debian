@@ -35,27 +35,27 @@ EOF
 
 | Key                                                                     | Action                                  |
 | ----------------------------------------------------------------------- | --------------------------------------- |
-| <kbd>super + a                                                          | Switch theme light/dark (Toggle)        |
-| <kbd>super + Shift + Return                                             | Rofi app launcher                       |
+| <kbd>super + a                                                          | Switch to light/dark theme (Toggle)     |
+| <kbd>super + shift + Return                                             | Rofi app launcher                       |
 | <kbd>super + {Return,u}                                                 | Open terminal urxvt                     |
 | <kbd>super + shift + {z,x}                                              | Windows {Close,kill}                    |
 | <kbd>super + :arrow_up: :arrow_down: :arrow_left: :arrow_right:         | Move window floating                    |
 | <kbd>super + alt + :arrow_up: :arrow_down: :arrow_left: :arrow_right:   | Resize windows floating                 |
 | <kbd>super + alt + {h,j,k,l}                                            | Resize windows tiling                   |
-| <kbd>super + {h,j,k,l}                                                  | swap node focus                         |
+| <kbd>super + {h,j,k,l}                                                  | Change node focus                       |
 | <kbd>super + shift + {h,j,k,l}                                          | Move active windows                     |
-| <kbd>super + Shift + Space                                              | Scratchpad: hide window                 |
-| <kbd>super + Space                                                      | Scratchpad: show window                 |
+| <kbd>super + shift + Space                                              | Scratchpad: hide window                 |
+| <kbd>super + space                                                      | Scratchpad: show window                 |
 | <kbd>super + 1/2/3/4/5/6/7/8/9                                          | Swap workspace                          |
-| <kbd>super + Shift + 1/2/3/4/5/6/7/8/9                                  | Move active windows to workspace        |
-| <kbd>super + z                                                          | run cmus musik player                   |
+| <kbd>super + shift + 1/2/3/4/5/6/7/8/9                                  | Move active windows to workspace        |
+| <kbd>super + z                                                          | Musik player cmus                       |
 | <kbd>super + {equal,minus}                                              | Focus the next/previous window          |
 | <kbd>super + shift + {equal,minus}                                      | Focus the older or newer node           |
 | <kbd>super + XF86MonBrightness{Up,Down}                                 | Set brightness                          |
 | <kbd>super + XF86Audio{RaiseVolume,LowerVolume,Mute}                    | Set audio volume                        |
 | <kbd>super + shift + {s,b}                                              | Open config {sxhkdrc,bspwmrc}           |
 | <kbd>super + Delete                                                     | Lock screen                             |
-| <kbd>super + Shift + Delete                                             | Power menu                              |
+| <kbd>super + shift + Delete                                             | Power menu                              |
 | <kbd>super + alt + {r,q}                                                | WM {Restart,Quit}                       |
 
 
