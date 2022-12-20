@@ -74,8 +74,8 @@ EOF
 | <kbd>super + shift + {h,j,k,l}                                          | Move active windows                     |
 | <kbd>super + shift + Space                                              | Scratchpad: hide window                 |
 | <kbd>super + space                                                      | Scratchpad: show window                 |
-| <kbd>super + 1/2/3/4/5/6/7/8/9                                          | Swap workspace                          |
-| <kbd>super + shift + 1/2/3/4/5/6/7/8/9                                  | Move active windows to workspace        |
+| <kbd>super + {1,2,3,4,5,}                                               | Swap workspace                          |
+| <kbd>super + shift + {1,2,3,4,5,}                                       | Move active windows to workspace        |
 | <kbd>super + z                                                          | Musik player cmus                       |
 | <kbd>super + {equal,minus}                                              | Focus the next/previous window          |
 | <kbd>super + shift + {equal,minus}                                      | Focus the older or newer node           |
