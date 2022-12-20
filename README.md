@@ -21,27 +21,27 @@ firefox-esr geany vim mpv htop thunar gvfs
 **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
 ### **Installation**
-> **clone bspwm-debian dotfile**
+* **clone bspwm-debian dotfile**
 ```bash
 cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
 ```
-> **uncompress icons**
+* **uncompress icons**
 ```bash
 cd bspwm-debian/.icons && tar -Jxvf icon.tar.xz ; rm -f icon.tar.xz
 ```
-> **uncompress themes**
+* **uncompress themes**
 ```bash
 cd ../.themes && tar -Jxvf theme.tar.xz ; rm -f theme.tar.xz
 ```
-> **uncompress fonts**
+* **uncompress fonts**
 ```bash
 cd ../.fonts && tar -Jxvf font.tar.xz ; rm -f font.tar.xz
 ```
-> **copy dotfile to home directory**
+* **copy dotfile to home directory**
 ```bash
 cd .. && cp -rf . $HOME
 ```
-> **refresh cache fonts**
+* **refresh cache fonts**
 ```bash
 fc-cache -rv
 ```
