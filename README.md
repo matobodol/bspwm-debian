@@ -41,10 +41,16 @@ EOF
 | <kbd>Mod + Space                                                      | Scratchpad: show (like i3wm)            |
 | <kbd>Mod + 1/2/3/4/5/6/7/8/9                                          | Swap Workspace                          |
 | <kbd>Mod + Shift + 1/2/3/4/5/6/7/8/9                                  | Move active windows to workspace        |
-| <kbd>Mod + Shift + Del                                                | Power Menu                              |
-| <kbd>Mod + Del                                                        | Lock Screen                             |
 | <kbd>Mod + z                                                          | run cmus musik player                   |
 | <kbd>Mod + a                                                          | Switch theme light/dark (Toggle)        |
+| <kbd>Mod + {equal,minus}                                              | Focus the next/previous window          |
+| <kbd>Mod + shift + {equal,minus}                                      | Focus the older or newer node           |
+| <kbd>Mod + XF86MonBrightness{Up,Down}                                 | Set brightness                          |
+| <kbd>Mod + XF86Audio{RaiseVolume,LowerVolume,Mute}                    | Set audio volume                        |
+| <kbd>Mod + shift + {s,b}                                              | Open config {sxhkdrc,bspwmrc}           |
+| <kbd>Mod + Del                                                        | Lock Screen                             |
+| <kbd>Mod + Shift + Del                                                | Power Menu                              |
 | <kbd>Mod + alt + {r,q}                                                | WM {Restart,Quit}                       |
+
 
 
