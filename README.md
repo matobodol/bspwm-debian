@@ -20,7 +20,7 @@ firefox-esr geany vim mpv htop ranger
 * ### Compositor
 > **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
-* ### Installing
+* ### Installation
 > **clone bspwm-debian dotfile**
 ```bash
 cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
