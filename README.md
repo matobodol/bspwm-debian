@@ -2,29 +2,28 @@
 <img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
 <img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/>
 
-* ### X11 minimal
+### X11 minimal
 ```bash
 xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-video-intel xserver-xorg-input-libinput 
 ```
 
-* ### Dependensi
+### Dependensi
 ```bash
 bspwm sxhkd rofi polybar dunst conky rxvt-unicode scrot i3lock feh neofetch imagemagick w3m xsettingsd cmus xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils xdg-user-dirs lxpolkit tar ranger
 ```
 
-* ### Optional
+### Optional
 ```bash
 firefox-esr geany vim mpv htop thunar gvfs
 ```
 
-* ### Compositor
-> **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
+### Compositor
+**Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
-* ### Installation
+### Installation
 > **clone bspwm-debian dotfile**
 ```bash
 cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
-```
 ```
 > **uncompress icons**
 ```bash
