@@ -17,16 +17,25 @@ bspwm sxhkd rofi polybar dunst conky rxvt-unicode scrot i3lock feh neofetch imag
 firefox-esr geany vim mpv htop
 ```
 ### **Network**
+* install iwd
 ```bash
 sudo apt install iwd
 ```
+* disable services conflict
 ```bash
 systemctl stop NetworkManager
-systemctl disable --now NetworkManager
-systemctl disable --now wpa_supplicant
 ```
 ```bash
+systemctl disable --now NetworkManager
+```
+```bash
+systemctl disable --now wpa_supplicant
+```
+* enable iwd service
+```bash
 systemctl enable --now iwd
+```
+```bash
 systemctl restart iwd
 ```
 ### **Compositor**
@@ -75,30 +84,30 @@ EOF
 ## **Keybind**
 | Key                                                                     | Action                                  |
 | ----------------------------------------------------------------------- | --------------------------------------- |
-| <kbd>super + a                                                          | Switch to light/dark theme (Toggle)     |
-| <kbd>super + shift + Return                                             | Rofi app launcher                       |
-| <kbd>super + {Return,u}                                                 | Open terminal urxvt                     |
-| <kbd>super + shift + {z,x}                                              | Windows {Close,kill}                    |
-| <kbd>super + :arrow_up: :arrow_down: :arrow_left: :arrow_right:         | Move window floating                    |
-| <kbd>super + alt + :arrow_up: :arrow_down: :arrow_left: :arrow_right:   | Resize windows floating                 |
-| <kbd>super + alt + {h,j,k,l}                                            | Resize windows tiling                   |
-| <kbd>super + {h,j,k,l}                                                  | Change node focus                       |
-| <kbd>super + shift + {h,j,k,l}                                          | Move active windows                     |
-| <kbd>super + shift + Space                                              | Scratchpad: hide window                 |
-| <kbd>super + space                                                      | Scratchpad: show window                 |
-| <kbd>super + {1,2,3,4,5,}                                               | Swap workspace                          |
-| <kbd>super + shift + {1,2,3,4,5,}                                       | Move active windows to workspace        |
-| <kbd>super + z                                                          | Musik player cmus                       |
-| <kbd>super + {equal,minus}                                              | Focus the next/previous window          |
-| <kbd>super + shift + {equal,minus}                                      | Focus the older or newer node           |
-| <kbd>super + XF86MonBrightness{Up,Down}                                 | Set brightness                          |
-| <kbd>super + XF86Audio{RaiseVolume,LowerVolume,Mute}                    | Set audio volume                        |
-| <kbd>super + shift + {s,b}                                              | Open config {sxhkdrc,bspwmrc}           |
-| <kbd>super + Delete                                                     | Lock screen                             |
-| <kbd>{Print,super + Print,super + shift + print}                        | Screen shot menu, capture focused, capture include pointer |
-| <kbd>super + shift + End                                                | Wifi network manager (iwd)              |
-| <kbd>super + shift + Delete                                             | Power menu                              |
-| <kbd>super + alt + {r,q}                                                | WM {Restart,Quit}                       |
+| super + a                                                          | Switch to light/dark theme (Toggle)     |
+| super + shift + Return                                             | Rofi app launcher                       |
+| super + {Return,u}                                                 | Open terminal urxvt                     |
+| super + shift + {z,x}                                              | Windows {Close,kill}                    |
+| super + :arrow_up: :arrow_down: :arrow_left: :arrow_right:         | Move window floating                    |
+| super + alt + :arrow_up: :arrow_down: :arrow_left: :arrow_right:   | Resize windows floating                 |
+| super + alt + {h,j,k,l}                                            | Resize windows tiling                   |
+| super + {h,j,k,l}                                                  | Change node focus                       |
+| super + shift + {h,j,k,l}                                          | Move active windows                     |
+| super + shift + Space                                              | Scratchpad: hide window                 |
+| super + space                                                      | Scratchpad: show window                 |
+| super + {1,2,3,4,5,}                                               | Swap workspace                          |
+| super + shift + {1,2,3,4,5,}                                       | Move active windows to workspace        |
+| super + z                                                          | Musik player cmus                       |
+| super + {equal,minus}                                              | Focus the next/previous window          |
+| super + shift + {equal,minus}                                      | Focus the older or newer node           |
+| super + XF86MonBrightness{Up,Down}                                 | Set brightness                          |
+| super + XF86Audio{RaiseVolume,LowerVolume,Mute}                    | Set audio volume                        |
+| super + shift + {s,b}                                              | Open config {sxhkdrc,bspwmrc}           |
+| super + Delete                                                     | Lock screen                             |
+| {Print,super + Print,super + shift + print}                        | Screen shot menu, capture focused, capture include pointer |
+| super + shift + End                                                | Wifi network manager (iwd)              |
+| super + shift + Delete                                             | Power menu                              |
+| super + alt + {r,q}                                                | WM {Restart,Quit}                       |
 
 
 
