@@ -2,21 +2,21 @@
 <img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
 <img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/>
 
-### **X11 minimal**
+### X11 minimal
 ```bash
 xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-video-intel xserver-xorg-input-libinput 
 ```
 
-### **Dependensi**
+### Dependensi
 ```bash
 bspwm sxhkd rofi polybar dunst conky rxvt-unicode scrot i3lock feh neofetch imagemagick w3m xsettingsd cmus xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils xdg-user-dirs lxpolkit tar ranger thunar gvfs
 ```
 
-### **Optional**
+### Optional
 ```bash
 firefox-esr geany vim mpv htop
 ```
-### **Network**
+### Network
 * install iwd
 ```bash
 sudo apt install iwd
@@ -38,8 +38,8 @@ systemctl enable --now iwd
 ```bash
 systemctl restart iwd
 ```
-### **Compositor**
-**Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
+### Compositor
+* **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
 ### **Installation**
 * **clone bspwm-debian dotfile**
@@ -67,7 +67,7 @@ cd .. && cp -rf . $HOME
 fc-cache -rv
 ```
 
-## **Tap to click**
+## Tap to click
 ```bash
 sudo cat > /etc/X11/xorg.conf.d/30-touchpad.conf <<EOF
 Section "InputClass"
@@ -81,9 +81,9 @@ EndSection
 EOF
 ```
 
-## **Keybind**
-| Key                                                                     | Action                                  |
-| ----------------------------------------------------------------------- | --------------------------------------- |
+## Keybind
+| Key                                                                | Action                                  |
+| ------------------------------------------------------------------ | --------------------------------------- |
 | super + a                                                          | Switch to light/dark theme (Toggle)     |
 | super + shift + Return                                             | Rofi app launcher                       |
 | super + {Return,u}                                                 | Open terminal urxvt                     |
@@ -104,7 +104,7 @@ EOF
 | super + XF86Audio{RaiseVolume,LowerVolume,Mute}                    | Set audio volume                        |
 | super + shift + {s,b}                                              | Open config {sxhkdrc,bspwmrc}           |
 | super + Delete                                                     | Lock screen                             |
-| {Print,super + Print,super + shift + print}                        | Screen shot menu, capture focused, capture include pointer |
+| {Print,super + Print,super + shift + print}                        | Screenshot: menu,focused,include pointer|
 | super + shift + End                                                | Wifi network manager (iwd)              |
 | super + shift + Delete                                             | Power menu                              |
 | super + alt + {r,q}                                                | WM {Restart,Quit}                       |
