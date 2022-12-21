@@ -1,8 +1,8 @@
 #!/bin/bash
 #==============================================================[NETWORK]
 source $HOME/.config/bspwm/globalrc
-ESSIDLAST=ginkgo
-PASSLAST=1sampai10
+ESSIDLAST=
+PASSLAST=
 
 wifi_connecting() {
 	n=35
