@@ -9,14 +9,26 @@ xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-v
 
 ### **Dependensi**
 ```bash
-bspwm sxhkd rofi polybar dunst conky rxvt-unicode scrot i3lock feh neofetch imagemagick w3m xsettingsd cmus xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils xdg-user-dirs lxpolkit tar ranger
+bspwm sxhkd rofi polybar dunst conky rxvt-unicode scrot i3lock feh neofetch imagemagick w3m xsettingsd cmus xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils xdg-user-dirs lxpolkit tar ranger thunar gvfs
 ```
 
 ### **Optional**
 ```bash
-firefox-esr geany vim mpv htop thunar gvfs
+firefox-esr geany vim mpv htop
 ```
-
+### **Network**
+```bash
+sudo apt install iwd
+```
+```bash
+systemctl stop NetworkManager
+systemctl disable --now NetworkManager
+systemctl disable --now wpa_supplicant
+```
+```bash
+systemctl enable --now iwd
+systemctl restart iwd
+```
 ### **Compositor**
 **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
@@ -27,15 +39,15 @@ cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
 ```
 * **uncompress icons**
 ```bash
-cd bspwm-debian/.icons && tar -Jxvf icon.tar.xz ; rm -f icon.tar.xz
+cd bspwm-debian/.icons && tar -Jxvf icons.tar.xz ; rm -f icons.tar.xz
 ```
 * **uncompress themes**
 ```bash
-cd ../.themes && tar -Jxvf theme.tar.xz ; rm -f theme.tar.xz
+cd ../.themes && tar -Jxvf themes.tar.xz ; rm -f themes.tar.xz
 ```
 * **uncompress fonts**
 ```bash
-cd ../.fonts && tar -Jxvf font.tar.xz ; rm -f font.tar.xz
+cd ../.fonts && tar -Jxvf fonts.tar.xz ; rm -f fonts.tar.xz
 ```
 * **copy dotfile to home directory**
 ```bash
@@ -83,6 +95,8 @@ EOF
 | <kbd>super + XF86Audio{RaiseVolume,LowerVolume,Mute}                    | Set audio volume                        |
 | <kbd>super + shift + {s,b}                                              | Open config {sxhkdrc,bspwmrc}           |
 | <kbd>super + Delete                                                     | Lock screen                             |
+| <kbd>{Print,super + Print,super + shift + print}                        | Screen shot menu, capture focused, capture include pointer |
+| <kbd>super + shift + End                                                | Wifi network manager (iwd)              |
 | <kbd>super + shift + Delete                                             | Power menu                              |
 | <kbd>super + alt + {r,q}                                                | WM {Restart,Quit}                       |
 
