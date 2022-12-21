@@ -9,6 +9,6 @@ currentvoffset=$(cat $HOME/.config/bspwm/conky/kidung_wingit | grep voffset | aw
 if [[ $currentvoffset -ne $voffset ]]; then
 sed -i "22s/$currentvoffset\}/$voffset\}/" ~/.config/bspwm/conky/kidung_wingit
 fi
-conky -c ~/.config/bspwm/conky/kidung_wingit &>/dev/null
+conky -c ~/.config/bspwm/conky/kidung_wingit &&
 
 exit 0

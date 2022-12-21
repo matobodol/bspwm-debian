@@ -1,7 +1,7 @@
 * {
-	accent:					#B379F2;
-	background:				#363C41;
-	background-light:		#15191F;
-	foreground:				#64D1E0;
-	fg-selected:			#FFFFFF;
+	accent:			#B379F2;
+	background:		#363C41;
+	background-light:	#15191F;
+	foreground:		#64D1E0;
+	fg-selected:		#FFFFFF;
 }

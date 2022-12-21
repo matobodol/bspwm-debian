@@ -13,7 +13,7 @@ bspc config gapless_monocle      true
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a cmus state=floating
-bspc rule -a Firefox-esr desktop='^5' follow=on
+bspc rule -a Firefox-esr desktop='^5'
 bspc rule -a URxvt:cmus state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off

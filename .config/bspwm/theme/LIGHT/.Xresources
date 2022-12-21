@@ -54,13 +54,13 @@ URxvt.urlButton:                  1
 
 !COLOR SCHEME
 ! special
-*.foreground:			#5c5c5c
-*.background:			#f3f3f3
-*.cursorColor:			#5c5c5c
+*.foreground:	#5c5c5c
+*.background:	#f3f3f3
+*.cursorColor:	#5c5c5c
 
 ! black
-*.color0:       #f0f0f0
-*.color8:       #bdbdbd
+*.color0:       #515151
+*.color8:       #5c5c5c
 
 ! red
 *.color1:       #ef5093
@@ -87,8 +87,8 @@ URxvt.urlButton:                  1
 *.color14:      #1dbdff
 
 ! white
-*.color7:       #515151
-*.color15:      #5c5c5c
+*.color7:       #f3f3f3
+*.color15:      #f0f0f0
 
 
 
