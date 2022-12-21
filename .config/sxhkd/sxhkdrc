@@ -153,3 +153,11 @@ super + {_,shift + }Delete
 # switch theme
 super + a
 	~/.config/bspwm/scripts/switch-theme.sh
+
+# screen shoot
+{Print,super + Print,super + shift + Print}
+	~/.config/bspwm/scripts/screenshot.sh {menu,focus,pointer}
+
+# wifi
+super + shift + End
+	urxvt -e ~/.config/bspwm/scripts/network.sh
