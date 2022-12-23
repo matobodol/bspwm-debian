@@ -105,7 +105,7 @@ EOF
 | super + shift + {s,b}                                              | Open config {sxhkdrc,bspwmrc}           |
 | super + Delete                                                     | Lock screen                             |
 | {Print,super + Print,super + shift + print}                        | Screenshot: menu,focused,include pointer|
-| super + shift + End                                                | Wifi network manager (iwd)              |
+| super + {_,shift + }End                                            | Wifi (iwd) {connnect,forget network}    |
 | super + shift + Delete                                             | Power menu                              |
 | super + alt + {r,q}                                                | WM {Restart,Quit}                       |
 
