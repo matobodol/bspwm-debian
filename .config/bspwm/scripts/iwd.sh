@@ -1,8 +1,8 @@
 #! /bin/bash
 source ~/.config/bspwm/globalrc
 
-ESSID=ginkgo
-PASS=1sampai10
+ESSID=
+PASS=
 
 iface=$(iwctl device list | awk '$5=="station" {print $1}' | head -n 1)
 iface_powered=$(iwctl device list | grep "$iface" | awk '{print $3}')
