@@ -3,7 +3,7 @@
 #
 
 # terminal emulator
-super + {u,Return}
+super + Return
 	urxvt
 
 # make sxhkd reload its configuration files:
@@ -18,7 +18,7 @@ super + Escape
 super + alt + {q,r}
 	bspc {quit,wm -r}
 
-# (z)close and (x)kill
+# (c)lose and (k)ill
 super + shift + {z,x}
 	bspc node -{c,k}
 
@@ -105,57 +105,35 @@ super + ctrl + shift + space
 #
 
 # expand a window by moving one of its side outward
-super + alt + {Left,Down,Up,Right}
-        bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-super + alt + shift + {Left,Down,Up,Right}
-        bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+
 #---------------[user custom]
-
-# resize tiling window / move floating window
-super + alt + {h,j,k,l}
-        {bspc node -z left -20 0	;bspc node -z right -20 0,\
-         bspc node -z bottom 0 20	;bspc node -z top 0 20,\
-         bspc node -z bottom 0 -20	;bspc node -z top 0 -20,\
-         bspc node -z left 20 0		;bspc node -z right 20 0}
-
-# preselect and urxvt
-super + ctrl + shift {h,j,k,l}
-	bspc node -p {west,south,north,east}; urxvt
 
 # Set brightness
 XF86MonBrightness{Up,Down}
-	~/.config/bspwm/scripts/hws.sh {bright-up,bright-down} 
+	exec brightnessctl set {2%+,2%-} 
 # Set volume
-XF86Audio{RaiseVolume,LowerVolume,Mute}
-	~/.config/bspwm/scripts/hws.sh {vol-up,vol-down,mute}
+XF86Audio{Raise,Lower}Volume
+	exec pactl set-sink-volume @DEFAULT_SINK@ {+2%,-2%}
 # App launcher (rofi)
 super + shift + Return
-	~/.config/bspwm/launcher/rofi.sh
+	exec ~/.config/rofi/rofi.sh
 # Config (s)xhkdrc, (b)spwmrc
 super + shift + {s,b}
-	urxvt -e nano ~/.config/{sxhkd/sxhkdrc,bspwm/bspwmrc} 
+	exec urxvt --title config -e nano ~/.config/{sxhkd/sxhkdrc,bspwm/bspwmrc} 
 # Scratchpad
 super + {_,shift + }@space
-	~/.config/bspwm/scratchpad.sh {switch-app,toggle-flag}
+	exec ~/.config/bspwm/scratchpad.sh {switch-app,toggle-flag}
 # musik (cmus)
-super + z 
-	~/.config/bspwm/scripts/musik.sh
-# restart/poweroff
-super + {_,shift + }Delete
-	~/.config/bspwm/{lock.sh,launcher/powermenu/powermenu.sh}
-# switch theme
-super + a
-	~/.config/bspwm/scripts/switch-theme.sh
-# screen shoot
-{Print,super + Print,super + shift + Print}
-	~/.config/bspwm/scripts/screenshot.sh {menu,focus,pointer}
-# wifi
-super + {_,shift + }End
-	urxvt -name iwd -e ~/.config/bspwm/scripts/iwd.sh {0,1}
+super + zx 
+	exec urxvt --title "cmus" -e cmus
