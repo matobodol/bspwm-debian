@@ -146,7 +146,7 @@ super + {_,shift + }@space
 	~/.config/bspwm/scratchpad.sh {switch-app,toggle-flag}
 # musik (cmus)
 super + z 
-	~/.config/bspwm/scripts/musik.sh
+	~/.config/bspwm/scripts/cmus.sh
 # restart/poweroff
 super + {_,shift + }Delete
 	~/.config/bspwm/{lock.sh,launcher/powermenu/powermenu.sh}
@@ -155,7 +155,7 @@ super + a
 	~/.config/bspwm/scripts/switch-theme.sh
 # screen shoot
 {Print,super + Print,super + shift + Print}
-	~/.config/bspwm/launcher/screenshot/screenshot.sh {menu,focus,pointer}
+	~/.config/bspwm/scripts/screenshot.sh {menu,focus,pointer}
 # wifi
-super + shift + End
-	urxvt -e ~/.config/bspwm/scripts/network.sh
+super + {_,shift + }End
+	urxvt -e ~/.config/bspwm/scripts/iwd.sh {0,1}
