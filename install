@@ -1,0 +1,13 @@
+#! /bin/bash
+
+dir=~/.git
+file=~/README.md
+
+cp -rf . ~/
+cd ~/.icons && tar -Jxvf icons.tar.xz ; rm icons.tar.xz
+cd ~/.themes && tar -Jxvf themes.tar.xz ; rm themes.tar.xz
+cd ~/.fonts && tar -Jxvf fonts.tar.xz ; rm fonts.tar.xz
+
+[[ -d $dir ]] && rm -r $dir
+[[ -f $file ]] && rm -r $file
+fc-cache -rv
