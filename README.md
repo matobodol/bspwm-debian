@@ -38,6 +38,19 @@ systemctl enable --now iwd
 ```bash
 systemctl restart iwd
 ```
+* configure iwd
+```bash
+sudo cat > /etc/iwd/main.conf <<EOF
+[General]
+EnableNetworkConfiguration=true
+
+[Network]
+NameResolvingService=systemd
+EOF
+```
+Replace /etc/rosolv.conf
+nameserver 8.8.8.8
+
 ### Compositor
 * **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
