@@ -3,21 +3,30 @@ source ~/.config/bspwm/globalrc
 
 ESSID=
 PASS=
+forget=
 
 iface=$(iwctl device list | awk '$5=="station" {print $1}' | head -n 1)
 iface_powered=$(iwctl device list | grep "$iface" | awk '{print $3}')
 state=$(iwctl station $iface show | awk '$1=="State" {print $2}')
 
+if [[ -n $forget ]]; then unset ESSID; unset PASS ; fi
+
+switch() {
+	[[ $ESSID != $namawifi ]] && sed -i "0,/ESSID=.*/s//ESSID=$namawifi/" $0
+	[[ $PASS != $passwifi ]] && sed -i "0,/PASS=.*/s//PASS=$passwifi/" $0
+	[[ -n $forget ]] && sed -i "0,/forget.*/s//forget=/" $0
+}
+
 notify() {
 	iwctl station $iface connect "$namawifi" --passphrase "$passwifi" &>/dev/null
 	if [[ $? == 0 ]]; then
 		$NOTIFY -i $ICON/info.png -t 2300 -r 123 "Wifi Connected" "to $namawifi"
-		[[ "$ESSID" != "$namawifi" ]] && sed -i "0,/ESSID=.*/s//ESSID=$namawifi/" $0
-		[[ "$PASS" != "$passwifi" ]] && sed -i "0,/PASS=.*/s//PASS=$passwifi/" $0
+		switch
 	else
 		iwctl station $iface connect-hidden "$namawifi" --passphrase "$passwifi" &>/dev/null
 		if [[ $? == 0 ]]; then
 			$NOTIFY -i $ICON/info.png -t 2300 -r 123 "Wifi: Connected" "to $namawifi"
+			switch
 		else
 		 	$NOTIFY -i $ICON/info.png -t 2300 -r 1234 "Wifi: Unable" "to connect"
 		fi
@@ -58,8 +67,11 @@ case $1 in
 		input_box
 	fi ;;
 1)
-	iwctl known-networks $ESSID forget &
+	if [[ -z $forget ]]; then
+	iwctl known-networks $ESSID forget; fyt=$?
 	if [[ $? -eq 0 ]]; then
 		$NOTIFY -i $ICON/info.png -t 2300 -r 123 "Forget Network \"$ESSID\""
-	fi ;;
+		[[ -z $forget ]] && sed -i "0,/forget.*/s//forget=$fyt/" $0
+	fi
+	fi;;
 esac

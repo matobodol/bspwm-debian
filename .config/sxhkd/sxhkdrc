@@ -155,7 +155,7 @@ super + a
 	~/.config/bspwm/scripts/switch-theme.sh
 # screen shoot
 {Print,super + Print,super + shift + Print}
-	~/.config/bspwm/scripts/screenshot.sh {menu,focus,pointer}
+	~/.config/bspwm/scripts/scrot.sh {menu,focus,pointer}
 # wifi
 super + {_,shift + }End
-	urxvt -name iwd -e ~/.config/bspwm/scripts/iwd.sh {0,1}
+	~/.config/bspwm/scripts/start_iwd.sh {0,1}
