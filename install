@@ -11,3 +11,4 @@ cd ~/.fonts && tar -Jxvf fonts.tar.xz ; rm fonts.tar.xz
 [[ -d $dir ]] && rm -r $dir
 [[ -f $file ]] && rm -r $file
 fc-cache -rv
+bspc wm -r
