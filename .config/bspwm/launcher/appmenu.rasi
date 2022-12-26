@@ -9,7 +9,7 @@ configuration {
 	display-drun:			"Apps : ";
 	display-run:			"Run : ";
 	display-window:			"Running Apps";
-	modi:				"drun,run,window,POWER MENU :~/.config/bspwm/launcher/favorit.sh";
+	modi:				"drun,run,window,Power menu :~/.config/bspwm/launcher/favorit.sh";
 }
 @import "color-scheme.rasi"
 * {

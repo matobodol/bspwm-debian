@@ -2,7 +2,7 @@
 source ~/.config/bspwm/globalrc
 iface=$(iwctl device list | awk '$5=="station" {print $1}' | head -n 1)
 
-ESSID='ginkgo 123'
+ESSID='semelekete'
 PASS='1sampai10'
 forget=
 
@@ -46,6 +46,7 @@ done | whiptail --title "NETWORK" --gauge "Please wait..." 6 55 0
 }
 
 input_box() {
+	
 	namawifi=$(whiptail --title "WIFI" --inputbox "Nama wifi: " --cancel-button "Exit" 7 55 "$ESSID" 3>&1 1>&2 2>&3)
 	case $?  in 1 | 255) exit; esac
 	passwifi=$(whiptail --title "WIFI" --passwordbox "Kata sandi wifi: " --cancel-button "Exit" 7 55 "$PASS" 3>&1 1>&2 2>&3)

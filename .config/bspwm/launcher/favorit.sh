@@ -10,11 +10,11 @@ if [ "$@" ]; then
 		*Shutdown) coproc Shutdown ;;
 	esac
 else
-	echo " Lock"
-	echo " Sleep"
-	echo " Logout"
-	echo " Reboot"
-	echo " Shutdown"
+	echo "   Lock"
+	echo "   Sleep"
+	echo "   Logout"
+	echo "   Reboot"
+	echo "   Shutdown"
 fi
 
 $@

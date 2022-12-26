@@ -56,7 +56,10 @@ LIGHT)
 	
 	sed -i "0,/accent =.*/s//accent = $light/" $panelconf
 	sed -i "0,/background =.*/s//background = $white/" $panelconf
-	sed -i "0,/foreground =.*/s//foreground = $black/" $panelconf
+	sed -i "0,/foreground =.*/s//foreground = #99A0AD/" $panelconf
+	sed -i "0,/fglight =.*/s//fglight = $red/" $panelconf
+	
+	sed -i "0,/color2.*/s//color2 = \'#F8FF00\'\,/" $HOME/.config/bspwm/conky/kidung_wingit
 
 	launcher-light
 	;;
@@ -67,8 +70,12 @@ DARK)
 	sed -i "s/Inherits.*/Inherits=Bibata-Modern-Ice/g" $cursorconf
 
 	sed -i "0,/accent =.*/s//accent = $dark/" $panelconf
+	sed -i "0,/fglight =.*/s//fglight = #64D1E0/" $panelconf
 	sed -i "0,/background =.*/s//background = $black/" $panelconf
-	sed -i "0,/foreground =.*/s//foreground = $white/" $panelconf
+	sed -i "0,/foreground =.*/s//foreground = #99A0AD/" $panelconf
+	
+	sed -i "0,/color2.*/s//color2 = \'#2be3fc\'\,/" $HOME/.config/bspwm/conky/kidung_wingit
+	
 	launcher-dark
 	;;
 esac
