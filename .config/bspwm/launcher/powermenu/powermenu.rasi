@@ -2,7 +2,7 @@
 configuration {
 show-icons: true;
 }
-@import "color-bar.rasi"
+@import "~/.config/bspwm/launcher/color-scheme.rasi"
 * {
    on:               #2be491;
   off:              #dddddd;
@@ -28,7 +28,7 @@ show-icons: true;
 
 * {
   background-color: @background;
-  text-color: @foreground;
+  text-color: @foreground-light;
   font: @icon-font;
 }
 
@@ -49,7 +49,7 @@ show-icons: true;
 
 #element.selected {
   background-color: @accent;
-  text-color: @background;
+  text-color: @fgselected;
 }
 
 * {
@@ -80,30 +80,6 @@ show-icons: true;
 }
 
 #element.selected {
-  border-color: @accent;
-  text-color: @fg-selected;
-}
-
-element.active,
-element.selected.urgent {
-  background-color: @on;
-  text-color: @background;
-  border-color: @on;
-}
-
-element.selected.urgent {
-  background-color: @accent;
-  border-color: @accent;
-}
-
-element.urgent,
-element.selected.active {
-  background-color: @off;
-  text-color: @background;
-  border-color: @off;
-}
-
-element.selected.active {
-  background-color: @accent;
-  border-color: @accent;
+  border-color: @bgselected;
+  text-color: @fgselected;
 }

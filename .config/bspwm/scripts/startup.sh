@@ -1,10 +1,13 @@
 #! /bin/bash
 
 source $HOME/.config/bspwm/globalrc
+refresh=always
 
+part_theme() {
 gtkconf=$HOME/.config/bspwm/theme/xsettingsd.conf
 panelconf=$HOME/.config/bspwm/panel/config.ini
-launcher=$HOME/.config/bspwm/launcher/colors.rasi
+cursorconf=$HOME/.icons/default/index.theme
+launcher=$HOME/.config/bspwm/launcher/color-scheme.rasi
 pwm=$HOME/.config/bspwm/launcher/powermenu/color-bar.rasi
 
 screen=$(xdpyinfo | awk '$1=="dimensions:" {print $2}')
@@ -13,94 +16,99 @@ if [[ $SCREEN != '$screen' ]]; then
 fi
 
 launcher-light() {
+# app menu
 cat > $launcher <<EOF
 * {
-	accent:			#B379F2;
-	background:		#F3F3F3;
-	foreground:		#363C41;
-	bgselected:		#FF80C3;
-	fgselected:		#FFFFFF;
-}
-EOF
-cat > $pwm <<EOF
-* {
-	accent:			#B379F2;
-	background:		#F9F9F9;
-	background-light:	#F0F0F0;
-	foreground:		#FF80C3;
-	fg-selected:		#FFFFFF;
+	accent:			$magenta;
+	bg-mainbox:		$magenta;
+	background:		$white;
+	background-light:	$light;
+	bgselected:		$red;
+	foreground:		$black;
+	foreground-light:	$red;
+	fgselected:		$white;
 }
 EOF
 }
 
 launcher-dark() {
+# app menu
 cat > $launcher <<EOF
 * {
-	accent:			#3B4252;
-	background:		#252A34;
-	foreground:		#64D1E0;
-	bgselected:		@accent;
-	fgselected:		#FFFFFF;
-}
-EOF
-cat > $pwm <<EOF
-* {
-	accent:			#B379F2;
-	background:		#3B4252;
-	background-light:	#252A34;
-	foreground:		#64D1E0;
-	fg-selected:		#FFFFFF;
+	accent:			$magenta;
+	bg-mainbox:		$dark;
+	background:		$black;
+	background-light:	$dark;
+	bgselected:		$dark;
+	foreground:		$cyan;
+	foreground-light:	$cyan;
+	fgselected:		$white;
 }
 EOF
 }
 
 case $THEME in
 LIGHT)
-	sed -i 's/Net\/IconThemeName.*/Net\/IconThemeName "Cobalt"/g' $gtkconf
-	sed -i 's/Net\/ThemeName.*/Net\/ThemeName "MonoTheme"/g' $gtkconf
-
-	sed -i '0,/background =.*/s//background = #F0F0F0/' $panelconf
-	sed -i '0,/foreground =.*/s//foreground = #363C41/' $panelconf
-	sed -i '0,/accent =.*/s//accent = #BDBDBD/' $panelconf
+	sed -i "s/Net\/ThemeName.*/Net\/ThemeName \"MonoTheme\"/g" $gtkconf
+	sed -i "s/Net\/IconThemeName.*/Net\/IconThemeName \"Cobalt\"/g" $gtkconf
+	sed -i "s/Gtk\/CursorThemeName.*/Gtk\/CursorThemeName \"Bibata-Modern-Classic\"/g" $gtkconf
+	sed -i "s/Inherits.*/Inherits=Bibata-Modern-Classic/g" $cursorconf
+	
+	sed -i "0,/accent =.*/s//accent = $light/" $panelconf
+	sed -i "0,/background =.*/s//background = $white/" $panelconf
+	sed -i "0,/foreground =.*/s//foreground = $black/" $panelconf
 
 	launcher-light
 	;;
 DARK)
-	sed -i 's/Net\/IconThemeName.*/Net\/IconThemeName "Cobalt-dark"/g' $gtkconf
-	sed -i 's/Net\/ThemeName.*/Net\/ThemeName "Nordic-darker"/g' $gtkconf
+	sed -i "s/Net\/ThemeName.*/Net\/ThemeName \"Nordic-darker\"/g" $gtkconf
+	sed -i "s/Net\/IconThemeName.*/Net\/IconThemeName \"Cobalt-dark\"/g" $gtkconf
+	sed -i "s/Gtk\/CursorThemeName.*/Gtk\/CursorThemeName \"Bibata-Modern-Ice\"/g" $gtkconf
+	sed -i "s/Inherits.*/Inherits=Bibata-Modern-Ice/g" $cursorconf
 
-	sed -i '0,/background =.*/s//background = #252A34/' $panelconf
-	sed -i '0,/foreground =.*/s//foreground = #f3f3f3/' $panelconf
-	sed -i '0,/accent =.*/s//accent = #3B4252/' $panelconf
-
+	sed -i "0,/accent =.*/s//accent = $dark/" $panelconf
+	sed -i "0,/background =.*/s//background = $black/" $panelconf
+	sed -i "0,/foreground =.*/s//foreground = $white/" $panelconf
 	launcher-dark
 	;;
 esac
+}
 
-##dunst
-$HOME/.config/dunst/dunst.sh &
+always() {
+	# set gtk theme
+	xsettingsd -c $HOME/.config/bspwm/theme/xsettingsd.conf &
+	# polybar
+	$HOME/.config/bspwm/panel/panel.sh &
+	# conky
+	$HOME/.config/bspwm/conky/start_kidung_wingit &
+	# dunst
+	$HOME/.config/dunst/dunst.sh &
+	# wallpaper
+	feh --bg-scale --no-fehbg ~/.config/bspwm/theme/wallpaper/${THEME}.png
+	# xrdb
+	xrdb -merge $HOME/.config/bspwm/theme/${THEME}/.Xresources
+}
 
-# wallpaper
-feh --bg-scale --no-fehbg ~/.config/bspwm/theme/wallpaper/${THEME}.png
+if [[ -z $(pgrep -l picom) ]] ; then refresh=always; fi
+case $refresh in
+part_theme)
+	part_theme
+	bspc wm -r 
+	;;
+always)
+	always
+		
+	# picom
+	[[ -z $(pgrep -l picom) ]] && picom -b &
+	# autenthic
+	[[ -z $(pgrep -l lxpolkit) ]] && lxpolkit &
 
-# theme
-xsettingsd -c $HOME/.config/bspwm/theme/xsettingsd.conf &
+	# set brightness & volume
+	brightnessctl set $BRIGHTNESS
+	amixer set Master $VOLUME
+	# theme notify
+	$NOTIFY -i $ICON/theme.png -t 2300 -r 123 "$THEME THEME" "Vol: $VOLUME | Bright: $BRIGHTNESS"
+	;;
+esac &&
 
-# xrdb
-xrdb -merge $HOME/.config/bspwm/theme/${THEME}/.Xresources
-
-# polybar
-$HOME/.config/bspwm/panel/panel.sh &
-
-# set brightness & volume
-brightnessctl set $BRIGHTNESS
-amixer set Master $VOLUME
-
-# conky
-$HOME/.config/bspwm/conky/start_kidung_wingit &
-
-# theme notify
-$NOTIFY -i $ICON/theme.png -t 2300 -r 123 "$THEME THEME" "Vol: $VOLUME | Bright: $BRIGHTNESS"
-
-
-
+exit 0

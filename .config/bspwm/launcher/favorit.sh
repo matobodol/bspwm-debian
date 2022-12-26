@@ -3,18 +3,18 @@ source ~/.config/bspwm/globalrc
 
 if [ "$@" ]; then
 	case "$@" in
-		LOCK) coproc Lock ;;
-		SLEEP) coproc Sleep ;;
-		LOGOUT) coproc Logout ;;
-		REBOOT) coproc Reboot ;;
-		SHUTDOWN) coproc Shutdown ;;
+		*Lock) coproc Lock ;;
+		*Sleep) coproc Sleep ;;
+		*Logout) coproc Logout ;;
+		*Reboot) coproc Reboot ;;
+		*Shutdown) coproc Shutdown ;;
 	esac
 else
-	echo "LOCK"
-	echo "SLEEP"
-	echo "LOGOUT"
-	echo "REBOOT"
-	echo "SHUTDOWN"
+	echo " Lock"
+	echo " Sleep"
+	echo " Logout"
+	echo " Reboot"
+	echo " Shutdown"
 fi
-"$@"
 
+$@

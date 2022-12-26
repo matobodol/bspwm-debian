@@ -155,7 +155,9 @@ super + a
 	~/.config/bspwm/scripts/switch-theme.sh
 # screen shoot
 {Print,super + Print,super + shift + Print}
-	~/.config/bspwm/scripts/scrot.sh {menu,focus,pointer}
+	~/.config/bspwm/launcher/shot/start_shot.sh {menu,focus,pointer}
 # wifi
 super + {_,shift + }End
-	~/.config/bspwm/scripts/start_iwd.sh {0,1}
+	~/.config/bspwm/scripts/start_iwd.sh {i,n}
+super + r
+	urxvt -name ranger -e ranger

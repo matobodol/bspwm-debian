@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 source $HOME/.config/bspwm/globalrc
 
@@ -29,14 +29,14 @@ else
 	chosen="$(echo -e "$options" | $rofi_command -dmenu -selected-row 1)"
 	case $chosen in
 		$screen)
-			scrot ${savedir}/%Y-%m-%d.png
+			sleep 0.1; scrot ${savedir}/%Y-%m-%d.png
 			notify ;;
 		$area)
 			scrot -s ${savedir}/crop.png
 			notify ;;
 		$timer)
 			for i in {5..1}; do
-			$NOTIFY -i "$ICON/shot.png" -t 1500 -r 123 'Screenshot' "in $(echo ${i}s..)"
+			$NOTIFY -i "$ICON/shot.png" -t 1100 -r 123 'Screenshot' "in $(echo ${i}second..)"
 			sleep 1
 			if [ $i = 1 ];then
 				dunstctl close-all

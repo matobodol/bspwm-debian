@@ -27,6 +27,7 @@ BLURTYPE="0x5" # 7.52s#
 #BLURTYPE="2x3" # 2.92s
 
 # Get the screenshot, add the blur and lock the screen with it
+dunstctl close-all; sleep 0.1
 $SCREENSHOT
 convert $IMAGE -blur $BLURTYPE $IMAGE
 i3lock -i $IMAGE

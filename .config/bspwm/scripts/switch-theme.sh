@@ -7,4 +7,9 @@ else
 	sed -i '0,/THEME.*/s//THEME=LIGHT/' $HOME/.config/bspwm/globalrc
 fi
 
-$HOME/.config/bspwm/scripts/startup.sh
+sed -i '0,/refresh.*/s//refresh=part_theme/' $HOME/.config/bspwm/scripts/startup.sh
+$HOME/.config/bspwm/scripts/startup.sh &&
+
+exit 0
+
+

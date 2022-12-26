@@ -13,5 +13,8 @@ sed -i "27s/width.*/width = $offset/" $HOME/.config/bspwm/panel/config.ini
 sed -i "s/offset-x.*/offset-x = $window_gap/" $HOME/.config/bspwm/panel/config.ini
 sed -i "s/offset-y.*/offset-y = $window_gap/" $HOME/.config/bspwm/panel/config.ini
 fi
-[[ -n $(pgrep -l polybar) ]] && pkill polybar
-polybar -c ~/.config/bspwm/panel/config.ini debian &
+
+pkill polybar
+polybar -c ~/.config/bspwm/panel/config.ini debian &&
+
+exit 0

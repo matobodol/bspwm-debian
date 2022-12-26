@@ -12,7 +12,7 @@ separator_height = 2
 padding = 8
 horizontal_padding = 11
 frame_width = 6
-frame_color = "#363C41"
+frame_color = "#3B4252"
 separator_color = "#51cdff"
 
 #font = mplus nerd font 10
@@ -52,15 +52,15 @@ context = ctrl+shift+period
 
 [urgency_low]
 timeout = 3
-background = "#363C41"
+background = "#3B4252"
 foreground = "#f3f3f3"
 
 [urgency_normal]
 timeout = 6
-background = "#363C41"
+background = "#3B4252"
 foreground = "#f3f3f3"
 
 [urgency_critical]
 timeout = 0
-background = "#363C41"
+background = "#3B4252"
 foreground = "#f3f3f3"

@@ -2,7 +2,7 @@
 configuration {
 show-icons: true;
 }
-@import "~/.config/bspwm/launcher/powermenu/color-bar.rasi"
+@import "~/.config/bspwm/launcher/color-scheme.rasi"
 * {
   on:               #2be491;
   off:              #dddddd;

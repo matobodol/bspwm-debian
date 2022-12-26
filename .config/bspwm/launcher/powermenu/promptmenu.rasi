@@ -3,7 +3,7 @@
 configuration {
 show-icons: true;
 }
-@import "color-bar.rasi"
+@import "~/.config/bspwm/launcher/color-scheme.rasi"
 * {
   on:               #2be491;
   off:              #dddddd;
@@ -56,7 +56,7 @@ show-icons: true;
 
 #element.selected {
   background-color: @accent;
-  text-color: @fg-selected;
+  text-color: @fgselected;
   border-color: @accent;
 }
 
@@ -84,26 +84,4 @@ prompt {
   background-color: @background;
   text-color: @foreground;
   font: @text-font;
-}
-
-element.active,
-element.selected.urgent {
-  background-color: @on;
-  text-color: @background;
-  border-color: @on;
-}
-
-element.selected.urgent {
-  border-color: @accent;
-}
-
-element.urgent,
-element.selected.active {
-  background-color: @off;
-  text-color: @background;
-  border-color: @off;
-}
-
-element.selected.active {
-  border-color: @accent;
 }

@@ -102,8 +102,8 @@ EOF
 | super + {Return,u}                                                 | Open terminal urxvt                     |
 | super + shift + {z,x}                                              | Windows {Close,kill}                    |
 | super + :arrow_up: :arrow_down: :arrow_left: :arrow_right:         | Move window floating                    |
-| super + alt + :arrow_up: :arrow_down: :arrow_left: :arrow_right:   | Resize windows floating                 |
-| super + alt + {h,j,k,l}                                            | Resize windows tiling                   |
+| super + alt + :arrow_up: :arrow_down: :arrow_left: :arrow_right:   | Resize window floating                  |
+| super + alt + {h,j,k,l}                                            | Resize window tiling                    |
 | super + {h,j,k,l}                                                  | Change node focus                       |
 | super + shift + {h,j,k,l}                                          | Move active windows                     |
 | super + shift + Space                                              | Scratchpad: hide window                 |

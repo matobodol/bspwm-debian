@@ -65,4 +65,6 @@ bright-down)
 	brightnessctl set 2%-
 	brightness_notify
 	;;
-esac
+esac &&
+
+exit 0
