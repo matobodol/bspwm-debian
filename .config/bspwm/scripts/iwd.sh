@@ -1,6 +1,7 @@
 #! /bin/bash
 source ~/.config/bspwm/globalrc
 iface=$(iwctl device list | awk '$5=="station" {print $1}' | head -n 1)
+state=$(iwctl station $iface show | awk '$1=="State" {print $2}')
 
 ESSID='semelekete'
 PASS='1sampai10'
@@ -58,13 +59,15 @@ case $1 in
 0)
 	input_box	;;
 1)
-	if [[ -z $forget ]]; then
-	iwctl known-networks "$ESSID" forget; fyt=$?
+if [[ $state == 'connected' ]]; then
+	#if [[ -z $forget ]]; then
+		iwctl station $iface disconnect; fyt=$?
 		if [[ $? -eq 0 ]]; then
-			$NOTIFY -i $ICON/info.png -t 2300 -r 123 "Forget Network" "\'$ESSID\'"
-			[[ -z $forget ]] && sed -i "0,/forget.*/s//forget=$fyt/" $0
+			$NOTIFY -i $ICON/info.png -t 2300 -r 123 "Wifi is Disconnected"
+			#[[ -z $forget ]] && sed -i "0,/forget.*/s//forget=$fyt/" $0
 		fi
-	fi;;
+	#fi
+fi ;;
 esac &&
 
 exit 0

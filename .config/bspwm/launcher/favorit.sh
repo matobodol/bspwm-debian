@@ -2,7 +2,7 @@
 source ~/.config/bspwm/globalrc
 
 if [ "$@" ]; then
-	case "$@" in
+	case "$1" in
 		*Lock) coproc Lock ;;
 		*Sleep) coproc Sleep ;;
 		*Logout) coproc Logout ;;
@@ -17,4 +17,4 @@ else
 	echo "   Shutdown"
 fi
 
-$@
+

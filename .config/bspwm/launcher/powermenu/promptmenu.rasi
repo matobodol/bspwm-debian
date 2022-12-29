@@ -30,7 +30,7 @@ show-icons: true;
 
 * {
   background-color: @background;
-  text-color: @foreground;
+  text-color: @foreground-light;
   font: @icon-font;
   location: center;
 }
@@ -82,6 +82,6 @@ prompt {
 #prompt {
   margin: @menu-prompt-margin;
   background-color: @background;
-  text-color: @foreground;
+  text-color: @foreground-light;
   font: @text-font;
 }

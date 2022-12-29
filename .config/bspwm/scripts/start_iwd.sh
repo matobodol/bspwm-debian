@@ -12,8 +12,7 @@ case $1 in
 		elif [[ $iface_powered == 'off' ]]; then
 			$NOTIFY -i $ICON/info.png -t 2000 -r 123 "Wifi Powered is OFF" ; exit 0
 			elif [[ $state == 'connected' ]]; then
-				iwctl station $iface disconnect
-				$NOTIFY -i $ICON/info.png -t 2000 -r 123 "Wifi Disconnected"
+				$NOTIFY -i $ICON/info.png -t 2000 -r 123 "Wifi is Connected"
 	else 
 		urxvt -name iwd -e ~/.config/bspwm/scripts/iwd.sh 0 ;
 	fi ;;
