@@ -179,48 +179,68 @@ install_picom(){
 	fi
 }
 
-option=(\
-'setup_bspwm' ': Untuk install dotfiles'\ 
-'setup_picom' ': Untuk install compositor picom'\ 
-'setup_touchpad  ' ': Untuk mengaktifkan tap to click'\
-)
-menu=$(whiptail --menu 'Pilih Menu : ' --title 'Setup Bspwm On Debian' 12 80 0 "${option[@]}" 3>&1 1>&2 2>&3)
+optional_packages(){
+	local PACKAGES=''
+	# cli packages
+	PACKAGES+='curl htop neofetch build-essential '
+	# gui packages
+	PACKAGES+='firefox-esr geany parole viewnior uget'
 
-case $menu in
-	setup_bspwm)
-		install_dotfiles
-		install_packages
-		setup_iwd
-		
-		if [[ $? -eq 0 ]]; then
-			if ! [[ $(sed -n "/alias wm='startx \/usr\/bin\/bspwm'/p" $HOME/.bashrc) ]]; then
-				echo "alias wm='startx /usr/bin/bspwm'" >> $HOME/.bashrc
-			fi
+	sudo apt install -y ${PACKAGES}
+	info_msg 'instal optional_packages, gagal.'
+	
+	# install uget-integrator
+	./uget-integrator/install_uget_integrator.sh
+	info_msg 'setup uget-integrator, gagal.'
+
+}
+
+
+if [[ $1 == 'opt' ]]; then
+	optional_packages
+else
+	option=(\
+	'setup_bspwm' ': Untuk install dotfiles'\ 
+	'setup_picom' ': Untuk install compositor picom'\ 
+	'setup_touchpad  ' ': Untuk mengaktifkan tap to click'\ 
+	)
+	menu=$(whiptail --menu 'Pilih Menu : ' --title 'Setup Bspwm On Debian' 12 80 0 "${option[@]}" 3>&1 1>&2 2>&3)
+	
+	case $menu in
+		setup_bspwm)
+			install_dotfiles
+			install_packages
+			setup_iwd
 			
-			clear
-			echo "install dotfiles selesai. Mohon relogin kemudian"
-			echo "untuk masuk ke bspwm ketik: wm"
-			sudo systemctl restart iwd.services
-		fi
-	;;
-	setup_picom)
-		install_picom
-		if [[ $? -eq 0 ]]; then
-			clear
-			echo "install selesai. Restart bspwm untuk menerapkan efek"
-		fi
-	;;
-	setup_touchpad*)
-		tap_to_click
-		if [[ $(sed -n '/Section/p' /etc/X11/xorg.conf.d/30-touchpad.conf) ]]; then
-			echo "touchpad sudah terconfigurasi."
-		elif [[ $? -eq 0 ]]; then
-			clear
-			echo "setup touchpad selesai."
-		fi
-	;;
-esac
-
+			if [[ $? -eq 0 ]]; then
+				if ! [[ $(sed -n "/alias wm='startx \/usr\/bin\/bspwm'/p" $HOME/.bashrc) ]]; then
+					echo "alias wm='startx /usr/bin/bspwm'" >> $HOME/.bashrc
+				fi
+				
+				clear
+				echo "install dotfiles selesai. Mohon relogin kemudian"
+				echo "untuk masuk ke bspwm ketik: wm"
+				sudo systemctl restart iwd.services
+			fi
+		;;
+		setup_picom)
+			install_picom
+			if [[ $? -eq 0 ]]; then
+				clear
+				echo "install selesai. Restart bspwm untuk menerapkan efek"
+			fi
+		;;
+		setup_touchpad*)
+			tap_to_click
+			if [[ $(sed -n '/Section/p' /etc/X11/xorg.conf.d/30-touchpad.conf) ]]; then
+				echo "touchpad sudah terconfigurasi."
+			elif [[ $? -eq 0 ]]; then
+				clear
+				echo "setup touchpad selesai."
+			fi
+		;;
+	esac
+fi
 
 
 
