@@ -39,7 +39,7 @@ install_dotfiles(){
 	# ekstak themes
 	cd $HOME/.themes && tar -Jxvf themes.tar.xz
 	info_msg 'Ekstrak themes.tar.xz gagal'
-	rm themes.tar.xz
+	rm themes.tar.xz && cd ..
 	info_msg 'Membersihkan archive themes gagal.'
 }
 #~ install packages
@@ -57,44 +57,67 @@ install_packages() {
 }
 
 ## setup network with iwd (iwctl)
-#~ mematikan network
-if_down(){
-	interfaceName=$(sudo iw dev | awk '/Interface/ {print $2}')
-	sudo ifdown $interfaceName
-	info_msg 'Memutuskan sementara sambungan internet, gagal.'
-}
-#~ configuring iwd
 setup_iwd(){
-	# embuat configurasi iwd
-	echo -e "[General]\nEnableNetworkConfiguration=true" | sudo tee -a /etc/iwd/main.conf
-	
-	# menonaktifkan layanan wpa_supplicant
-	sudo systemctl stop wpa_supplicant.service
-	sudo systemctl disable --now wpa_supplicant.service
-	
-	# mengaktifkan layanan iwd
-	sudo systemctl enable --now iwd.service
-	sudo systemctl start iwd.service
-}
-#~ connecting to wifi
-connect_to_wifi(){
 	clear
-	local SSID PSK
+	# menddapatkan nama interface
+	local interfaceName=$(sudo iw dev | awk '/Interface/ {print $2}')
 	
-	# user input
-	read -p "Nama Wifi: " SSID
-	echo -e "Kosongkan jika wifi tidak dipassword\n dengan langsung tekan Enter"
-	read -p "Password: " PSK
+	# memutuskan sambungan wpa_supplicant
+	if_down(){
+		sudo ifdown $interfaceName
+		info_msg 'Memutuskan sambungan wpa_supplicant, gagal.'
+	}
+	if_down
+	
+	# mengatur layanan iwd
+	setup_iwd_service(){
+		# membuat configurasi iwd
+		
+		if ! [[ -f /etc/iwd/main.conf ]]; then
+			echo -e "[General]\nEnableNetworkConfiguration=true" | sudo tee -a /etc/iwd/main.conf
+		fi
+	
+		# menonaktifkan layanan wpa_supplicant
+		sudo systemctl stop wpa_supplicant.service
+		sudo systemctl disable --now wpa_supplicant.service
+	
+		# mengaktifkan layanan iwd
+		sudo systemctl enable --now iwd.service
+		sudo systemctl start iwd.service
+	}
+	setup_iwd_service
 	
 	# menghubungkan ke wifi
-	iwctl station ${interfaceName} connect "${SSID}" --passphrase "${PSK}" &>/dev/null
-	info_msg 'setup connect_to_wifi gagal.'
+	connecting(){
+		local SSID PSK status
+
+		# user input
+		read -p "Nama Wifi: " SSID
+		echo -e "Kosongkan jika wifi tidak dipassword\n dengan langsung tekan Enter"
+		read -p "Password: " PSK
+	
+		# menghubungkan ke ssid terbuka
+		iwctl station ${interfaceName} connect "${SSID}" --passphrase "${PSK}" &>/dev/null
+		# jika gagal, menghubungkan ke ssid tersembunyi
+		[[ $? -ne 0 ]] && iwctl station ${interfaceName} connect-hidden "${SSID}" --passphrase "${PSK}" &>/dev/null
+	}
+	
+	# cek layanan iwd actif
+	local status=$(systemctl status iwd.service | awk '/Active: / {print $2}')
+	# jika layanan iwd aktif
+	if [[ $status -ne 'active' ]]; then
+		connecting
+	else
+		# jika layanan iwd tidak aktif
+		setup_iwd_service
+		connecting
+	fi
 }
 
 ## touchpad driver
 tap_to_click() {
-
-cat <<EOF | sudo tee -a /etc/X11/xorg.conf.d/30-touchpad.conf
+if ! [[ -f  /etc/X11/xorg.conf.d/30-touchpad.conf ]]; then
+cat <<EOF | sudo tee > /etc/X11/xorg.conf.d/30-touchpad.conf
 Section "InputClass"
 	Identifier "touchpad"
 	MatchIsTouchpad "on"
@@ -104,29 +127,42 @@ Section "InputClass"
 	Option "ScrollMethod" "twofinger"
 EndSection
 EOF
-info_msg 'setup tap_to_click gagal.'
+	
+	info_msg 'setup tap_to_click gagal.'
+fi
 }
 
 ## install picom
 install_picom(){
 	# install builder
 	sudo apt install -y build-essential
-	
-	# dependensi picom
-	sudo apt install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
+	info_msg 'install build-essential, gagal'
+
+	# install dependensi picom
+	local PACKAGES=''
+	PACKAGES+='libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson '
+	PACKAGES+='libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-glx0-dev libpixman-1-dev libxcb-render0-dev '
+	PACKAGES+='libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev '
+	sudo apt install -y ${PACKAGES}
+	info_msg 'install dependensi picom, gagal'
 	
 	# download picom
-	git clone https://github.com/yshui/picom.git && cd picom
-	info_msg 'git clone https://github.com/yshui/picom.git, gagal.'
-	git submodule update --init --recursive
-	
-	# compile picom
-	meson setup --buildtype=release . build
-	info_msg 'meson setup --buildtype=release . build, gagal'
-	ninja -C build
-	info_msg 'ninja -C build, gagal'
-	ninja -C build install
-	info_msg 'ninja -C build install, gagal'
+	if [[ -d picom ]]; then
+		rm -rf picom
+		info_msg 'membersihkan folder usang picom gagal'
+	else
+		git clone https://github.com/yshui/picom.git && cd picom
+		info_msg 'git clone https://github.com/yshui/picom.git, gagal.'
+		git submodule update --init --recursive
+		
+		# compile picom
+		meson setup --buildtype=release . build
+		info_msg 'meson setup --buildtype=release . build, gagal'
+		ninja -C build
+		info_msg 'ninja -C build, gagal'
+		ninja -C build install
+		info_msg 'ninja -C build install, gagal'
+	fi
 }
 
 option=(\
@@ -140,13 +176,14 @@ case $menu in
 	setup_bspwm)
 		install_dotfiles
 		install_packages
-		if_down
 		setup_iwd
-		connect_to_wifi
 		
 		if [[ $? -eq 0 ]]; then
+			if ! [[ $(sed -n "/alias wm='startx \/usr\/bin\/bspwm'/p" $HOME/.bashrc) ]]; then
+				echo "alias wm='startx /usr/bin/bspwm'" >> $HOME/.bashrc
+			fi
+			
 			clear
-			echo "alias wm='startx /usr/bin/bspwm'" >> $HOME/.bashrc
 			echo "install dotfiles selesai. Mohon relogin kemudian"
 			echo "untuk masuk ke bspwm ketik: wm"
 		fi
