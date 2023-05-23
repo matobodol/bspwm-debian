@@ -44,6 +44,7 @@ install_dotfiles(){
 }
 #~ install packages
 install_packages() {
+	local PACKAGES=''
 	PACKAGES+='sudo '
 	# x11 minimal
 	PACKAGES+='xserver-xorg-core xserver-xorg-input-libinput xserver-xorg-video-intel x11-xserver-utils x11-xkb-utils x11-utils xinit '
@@ -71,8 +72,10 @@ setup_iwd(){
 	
 	# mengatur layanan iwd
 	setup_iwd_service(){
+		# install iwd
+		sudo apt install -y iwd
+
 		# membuat configurasi iwd
-		
 		if ! [[ -f /etc/iwd/main.conf ]]; then
 			echo -e "[General]\nEnableNetworkConfiguration=true" | sudo tee /etc/iwd/main.conf
 		fi
@@ -100,18 +103,28 @@ setup_iwd(){
 		iwctl station ${interfaceName} connect "${SSID}" --passphrase "${PSK}" &>/dev/null
 		# jika gagal, menghubungkan ke ssid tersembunyi
 		[[ $? -ne 0 ]] && iwctl station ${interfaceName} connect-hidden "${SSID}" --passphrase "${PSK}" &>/dev/null
+		# notif jika sersambung ke jaringan wifi
+		[[ $? -eq 0 ]] && echo "Terhubung ke jaringan ${insterfaceName}"
 	}
-	
 	# cek layanan iwd actif
-	local status=$(systemctl status iwd.service | awk '/Active: / {print $2}')
-	# jika layanan iwd aktif
-	if [[ $status -ne 'active' ]]; then
+	local status_service=$(systemctl status iwd.service | awk '/Active: / {print $2}')
+	local status_connect=$(iwctl station wlan0 show | awk '/State/ (print $2)')
+	connecting
+
+	mengulang jika belum terhubung ke wifi
+	while true; do
+	# mengakhiri loop jika status iwctl connected
+	if [[ $status_connect -eq 'connected' ]]; then
+		break
+	# jika layanan iwd aktif tetapi tidak terhubung ke wifi
+	elif [[ $status_service -eq 'active' ]] && [[ $status_connect -ne 'connected' ]]; then
 		connecting
+	# jika layanan iwd belum aktif
 	else
-		# jika layanan iwd tidak aktif
 		setup_iwd_service
 		connecting
 	fi
+	done
 }
 
 ## touchpad driver
@@ -186,6 +199,7 @@ case $menu in
 			clear
 			echo "install dotfiles selesai. Mohon relogin kemudian"
 			echo "untuk masuk ke bspwm ketik: wm"
+			sudo systemctl restart iwd.services
 		fi
 	;;
 	setup_picom)
