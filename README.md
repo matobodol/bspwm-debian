@@ -22,7 +22,8 @@ iface nama_interface inet dhcp
 * aktifkan koneksi
 ```bash
 # ifup nama_interface
-``` </br></br>
+```
+</br></br>
 
 ### X11 minimal
 * saya merkomendasikan menginstall paket 'xorg' daripada X11 minimal.
