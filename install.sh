@@ -74,7 +74,7 @@ setup_iwd(){
 		# membuat configurasi iwd
 		
 		if ! [[ -f /etc/iwd/main.conf ]]; then
-			echo -e "[General]\nEnableNetworkConfiguration=true" | sudo tee -a /etc/iwd/main.conf
+			echo -e "[General]\nEnableNetworkConfiguration=true" | sudo tee /etc/iwd/main.conf
 		fi
 	
 		# menonaktifkan layanan wpa_supplicant
