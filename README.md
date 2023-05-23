@@ -5,13 +5,13 @@
 <img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/></br></br>
 
 ## Menghubungkan ke wifi
-* melihat nama interface
-> ```bash
+> * melihat nama interface
+```bash
 # iw dev | awk '/Interface/ {print$2}'
 # ip link set $interface up
 ```
 > * edit file /etc/network/interfaces dan tambahkan baris dibawah: </br>
-> !Note: Jangan lupa sesuaikan nama_interface, nama_wifi, dan pasword_wifi
+!Note: Jangan lupa sesuaikan nama_interface, nama_wifi, dan pasword_wifi
 ```bash
 allow-hotplug nama_interface
 iface nama_interface inet dhcp
