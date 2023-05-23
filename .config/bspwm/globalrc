@@ -3,7 +3,7 @@
 # hardware
 SCREEN=1366x768
 BRIGHTNESS=30%
-VOLUME=30%
+VOLUME=10%
 
 # global theme
 THEME=DARK

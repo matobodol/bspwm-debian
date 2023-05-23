@@ -1,16 +1,15 @@
 #!/bin/bash
 # Setup Bspwm On Debian Netinst Fresh Install
 
-
-## setup bspwm
-#~ install dotfiles
+#pesan error
 info_msg() {
-if [[ $? -ne 0 ]]; then
-	clear
-	local msg=$1
-	echo "$msg"
-	exit 0
-fi
+	# jika exit code dari proses sebelumnya bukan bernilai 0
+	if [[ $? -ne 0 ]]; then
+		clear
+		local msg=$1
+		echo "$msg"
+		exit 1
+	fi
 }
 
 install_dotfiles(){
@@ -42,7 +41,7 @@ install_dotfiles(){
 	rm themes.tar.xz && cd ..
 	info_msg 'Membersihkan archive themes gagal.'
 }
-#~ install packages
+# install packages
 install_packages() {
 	local PACKAGES=''
 	PACKAGES+='sudo '
@@ -171,8 +170,10 @@ install_picom(){
 		# compile picom
 		meson setup --buildtype=release . build
 		info_msg 'meson setup --buildtype=release . build, gagal'
+		
 		ninja -C build
 		info_msg 'ninja -C build, gagal'
+		
 		ninja -C build install
 		info_msg 'ninja -C build install, gagal'
 	fi
