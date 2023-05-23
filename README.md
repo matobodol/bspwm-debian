@@ -1,4 +1,4 @@
-# Setup Bspwm di Debian Netinst Fresh Install
+# SETUP BSPWM DI DEBIAN NETINST FRESH INSTALL
 
 ### Screenshot
 <img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
@@ -84,7 +84,7 @@ echo -e "[General]\nEnableNetworkConfiguration=true" | sudo tee -a /etc/iwd/main
 ```
 </br></br>
 
-## Compositor (optional)
+## Compositor
 * **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br></br></br>
 
 # CARA INSTALL
