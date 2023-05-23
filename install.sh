@@ -6,7 +6,9 @@
 #~ install dotfiles
 info_msg() {
 if [[ $? -ne 0 ]]; then
-	echo "setup gagal."
+	clear
+	local msg=$1
+	echo "$msg"
 	exit 0
 fi
 }
@@ -14,28 +16,34 @@ fi
 install_dotfiles(){
 	# membuat hirarki user direktory
 	xdg-user-dirs-update
+	info_msg 'xdg-user-dirs-update, gagal'
 	
 	# copy dotfile ke home direktory
 	cp -rf {.config,.fonts,.icons,.themes/} $HOME/
-	info_msg
-	
+	info_msg 'copying dotfiles ke direktori home gagal.'
 	# extrak fonts
 	cd $HOME/.fonts && tar -Jxvf fonts.tar.xz
+	info_msg 'Ekstrak fonts.tar.xz gagal'
 	rm fonts.tar.xz
+	info_msg 'Membersihkan archive fonts gagal.'
 	
 	# ekstrak icons
 	cd $HOME/.icons
 	tar -Jxvf icons.tar.xz
+	info_msg 'Ekstrak icons.tar.xz gagal'
 	tar -Jxvf cursor.tar.xz
+	info_msg 'Ekstrak cursor.tar.xz gagal'
 	rm icons.tar.xz cursor.tar.xz
+	info_msg 'Membersihkan archive fonts icons dan cursor gagal.'
 
 	# ekstak themes
 	cd $HOME/.themes && tar -Jxvf themes.tar.xz
+	info_msg 'Ekstrak themes.tar.xz gagal'
 	rm themes.tar.xz
+	info_msg 'Membersihkan archive themes gagal.'
 }
 #~ install packages
 install_packages() {
-	local PACKAGES=''
 	PACKAGES+='sudo '
 	# x11 minimal
 	PACKAGES+='xserver-xorg-core xserver-xorg-input-libinput xserver-xorg-video-intel x11-xserver-utils x11-xkb-utils x11-utils xinit '
@@ -45,7 +53,7 @@ install_packages() {
 	PACKAGES+='thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m cmus'
 	
 	sudo apt install -y ${PACKAGES}
-	info_msg
+	info_msg 'install_packages gagal'
 }
 
 ## setup network with iwd (iwctl)
@@ -53,7 +61,7 @@ install_packages() {
 if_down(){
 	interfaceName=$(sudo iw dev | awk '/Interface/ {print $2}')
 	sudo ifdown $interfaceName
-	info_msg
+	info_msg 'Memutuskan sementara sambungan internet, gagal.'
 }
 #~ configuring iwd
 setup_iwd(){
@@ -67,11 +75,10 @@ setup_iwd(){
 	# mengaktifkan layanan iwd
 	sudo systemctl enable --now iwd.service
 	sudo systemctl start iwd.service
-	
-	info_msg
 }
 #~ connecting to wifi
 connect_to_wifi(){
+	clear
 	local SSID PSK
 	
 	# user input
@@ -81,11 +88,12 @@ connect_to_wifi(){
 	
 	# menghubungkan ke wifi
 	iwctl station ${interfaceName} connect "${SSID}" --passphrase "${PSK}" &>/dev/null
-	info_msg
+	info_msg 'setup connect_to_wifi gagal.'
 }
 
 ## touchpad driver
 tap_to_click() {
+
 cat <<EOF | sudo tee -a /etc/X11/xorg.conf.d/30-touchpad.conf
 Section "InputClass"
 	Identifier "touchpad"
@@ -96,13 +104,11 @@ Section "InputClass"
 	Option "ScrollMethod" "twofinger"
 EndSection
 EOF
-
-info_msg
+info_msg 'setup tap_to_click gagal.'
 }
 
 ## install picom
 install_picom(){
-	
 	# install builder
 	sudo apt install -y build-essential
 	
@@ -111,17 +117,27 @@ install_picom(){
 	
 	# download picom
 	git clone https://github.com/yshui/picom.git && cd picom
+	info_msg 'git clone https://github.com/yshui/picom.git, gagal.'
 	git submodule update --init --recursive
 	
 	# compile picom
 	meson setup --buildtype=release . build
+	info_msg 'meson setup --buildtype=release . build, gagal'
 	ninja -C build
+	info_msg 'ninja -C build, gagal'
 	ninja -C build install
-	info_msg
+	info_msg 'ninja -C build install, gagal'
 }
 
-case $1 in
-	set_install)
+option=(\
+'setup_bspwm' ': Untuk install dotfiles'\ 
+'setup_picom' ': Untuk install compositor picom'\ 
+'setup_touchpad  ' ': Untuk mengaktifkan tap to click'\
+)
+menu=$(whiptail --menu 'Pilih Menu : ' --title 'Setup Bspwm On Debian' 12 80 0 "${option[@]}" 3>&1 1>&2 2>&3)
+
+case $menu in
+	setup_bspwm)
 		install_dotfiles
 		install_packages
 		if_down
@@ -135,27 +151,22 @@ case $1 in
 			echo "untuk masuk ke bspwm ketik: wm"
 		fi
 	;;
-	set_picom)
+	setup_picom)
 		install_picom
 		if [[ $? -eq 0 ]]; then
 			clear
 			echo "install selesai. Restart bspwm untuk menerapkan efek"
 		fi
 	;;
-	set_touchpad)
+	setup_touchpad*)
 		tap_to_click
 		if [[ $? -eq 0 ]]; then
 			clear
-			echo "setup touchpad gagal."
+			echo "setup touchpad selesai."
 		fi
 	;;
-	*)
-		echo -e "set_install\t: Untuk install dotfiles"
-		echo -e "set_picom\t: Untuk install picom"
-		echo -e "set_touchpad\t: Untuk mengaktifkan 'tap to click'\n\n"
-		echo "contoh: ./install.sh set_install"
-	;;
 esac
+
 
 
 
