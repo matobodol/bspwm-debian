@@ -190,15 +190,12 @@ optional_packages(){
 	info_msg 'instal optional_packages, gagal.'
 	
 	# install uget-integrator
-	./uget-integrator/install_uget_integrator.sh
-	info_msg 'setup uget-integrator, gagal.'
-
+	. $(dirname $(realpath $0))/uget-integrator/install_uget_integrator.sh
+	#info_msg 'setup uget-integrator, gagal.'
 }
 
+main_menu(){
 
-if [[ $1 == 'opt' ]]; then
-	optional_packages
-else
 	option=(\
 	'setup_bspwm' ': Untuk install dotfiles'\ 
 	'setup_picom' ': Untuk install compositor picom'\ 
@@ -240,13 +237,11 @@ else
 			fi
 		;;
 	esac
+}
+
+if [[ $1 == 'opt' ]]; then
+	optional_packages
+else
+	main_menu
 fi
-
-
-
-
-
-
-
-
 
