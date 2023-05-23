@@ -76,13 +76,11 @@ systemctl disable --now wpa_supplicant
 > * aktifkan layanan iwd.service
 ```bash
 systemctl enable --now iwd.service
-```
-```bash
 systemctl restart iwd.service
 ```
 > * configure iwd
 ```bash
-echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingService=systemd\n" | sudo tee -a /etc/iwd/main.conf
+echo -e "[General]\nEnableNetworkConfiguration=true" | sudo tee -a /etc/iwd/main.conf
 ```
 </br></br>
 
@@ -97,11 +95,7 @@ git clone https://github.com/matobodol/bspwm-debian.git && cd bspwm-debian
 > * **uncompress icons**
 ```bash
 cd .icons && tar -Jxvf icons.tar.xz
-```
-```bash
 tar -Jxvf cursor.tar.xz
-```
-```bash
 rm *.tar.xz
 ```
 > * **uncompress themes**
