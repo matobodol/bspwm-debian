@@ -2,7 +2,7 @@
 
 ### Screenshot
 <img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
-<img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/>
+<img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/></br></br>
 
 ### Menghubungkan ke wifi
 * melihat nama interface
@@ -22,7 +22,7 @@ iface nama_interface inet dhcp
 * aktifkan koneksi
 ```bash
 # ifup nama_interface
-```
+```</br></br>
 
 ### X11 minimal
 * saya merkomendasikan menginstall paket 'xorg' daripada X11 minimal.
