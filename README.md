@@ -75,14 +75,14 @@ echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingS
 </br></br>
 
 ## Compositor (optional)
-* **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br></br>
+* **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br></br></br>
 
 # CARA INSTALL
-* **clone bspwm-debian dotfile**
+> * **clone bspwm-debian dotfile**
 ```bash
 git clone https://github.com/matobodol/bspwm-debian.git && cd bspwm-debian
 ```
-* **uncompress icons**
+> * **uncompress icons**
 ```bash
 cd .icons && tar -Jxvf icons.tar.xz
 ```
@@ -92,23 +92,23 @@ tar -Jxvf cursor.tar.xz
 ```bash
 rm *.tar.xz
 ```
-* **uncompress themes**
+> * **uncompress themes**
 ```bash
 cd ../.themes && tar -Jxvf themes.tar.xz ; rm themes.tar.xz
 ```
-* **uncompress fonts**
+> * **uncompress fonts**
 ```bash
 cd ../.fonts && tar -Jxvf fonts.tar.xz ; rm fonts.tar.xz
 ```
-* **Hapus folder .git dan file README.md**
+> * **Hapus folder .git dan file README.md**
 ```bash
 rm -rf .git README.md
 ```
-* **copy dotfile ke home directory**
+> * **copy dotfile ke home directory**
 ```bash
 cd .. && cp -rf . $HOME
 ```
-* **refresh cache fonts**
+> * **refresh cache fonts**
 ```bash
 fc-cache -rv
 ```
