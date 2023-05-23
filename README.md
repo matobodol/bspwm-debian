@@ -1,6 +1,6 @@
 # Setup bspwm di Debian netinst fresh install
 
-# MY BSPWM SETUP
+### Screenshot
 <img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
 <img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/>
 
