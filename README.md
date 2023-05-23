@@ -71,9 +71,9 @@ echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingS
 ```
 
 ### Compositor (optional)
-* **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br>
+* **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br></br>
 
-</br># CARA INSTALL
+# CARA INSTALL
 * **clone bspwm-debian dotfile**
 ```bash
 git clone https://github.com/matobodol/bspwm-debian.git && cd bspwm-debian
