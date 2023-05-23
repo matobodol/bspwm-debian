@@ -1,10 +1,10 @@
 # Setup Bspwm di Debian Netinst Fresh Install
 
-### Screenshot
+## Screenshot
 <img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
 <img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/></br></br>
 
-### Menghubungkan ke wifi
+## Menghubungkan ke wifi
 * melihat nama interface
 ```bash
 # iw dev | awk '/Interface/ {print$2}'
@@ -25,14 +25,14 @@ iface nama_interface inet dhcp
 ```
 </br></br>
 
-### X11 minimal
+## X11 minimal
 * saya merkomendasikan menginstall paket 'xorg' daripada X11 minimal.
 ```bash
 xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-video-intel xserver-xorg-input-libinput 
 ```
 </br></br>
 
-### Membutuhkan
+## Membutuhkan
 * core
 ```bash
 bspwm sxhkd rofi polybar dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev
@@ -52,7 +52,7 @@ firefox-esr geany parole viwenior lxappearance nitrogen xfce4-power-manager
 ```
 </br></br>
 
-### Network Manager iwd (optional)
+## Network Manager iwd (optional)
 * install iwd
 ```bash
 sudo apt install iwd
@@ -74,7 +74,7 @@ echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingS
 ```
 </br></br>
 
-### Compositor (optional)
+## Compositor (optional)
 * **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br></br>
 
 # CARA INSTALL
