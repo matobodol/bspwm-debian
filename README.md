@@ -40,11 +40,11 @@ alsa-utils pulseaudio pulseaudio-utils lxpolkit
 ```
 * utilitas (recomeded)
 ```bash
-cmus thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m
+thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m cmus
 ```
 * aplikasi cli (optional)
 ```bash
-mpv neovim htop neofetch qt5ct qt5-style-plugins qt5ct qt5-style-plugins xclip thermald
+mpv neovim htop neofetch qt5ct qt5-style-plugins xclip thermald
 ```
 * aplikasi gui (optional)
 ```bash
