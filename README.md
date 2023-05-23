@@ -30,6 +30,7 @@ iface nama_interface inet dhcp
 ```bash
 xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-video-intel xserver-xorg-input-libinput 
 ```
+</br></br>
 
 ### Membutuhkan
 * core
@@ -49,6 +50,7 @@ mpv neovim htop neofetch qt5ct qt5-style-plugins qt5ct qt5-style-plugins xclip t
 ```bash
 firefox-esr geany parole viwenior lxappearance nitrogen xfce4-power-manager 
 ```
+</br></br>
 
 ### Network Manager iwd (optional)
 * install iwd
@@ -70,6 +72,7 @@ systemctl restart iwd
 ```bash
 echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingService=systemd\n" | sudo tee /etc/iwd/main.conf
 ```
+</br></br>
 
 ### Compositor (optional)
 * **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br></br>
@@ -109,6 +112,7 @@ cd .. && cp -rf . $HOME
 ```bash
 fc-cache -rv
 ```
+</br></br>
 
 ## Aktifkan tap to click pada touchpad
 add to /etc/X11/xorg.conf.d/30-touchpad.conf
@@ -122,6 +126,7 @@ Section "InputClass"
 	Option "ScrollMethod" "twofinger"
 EndSection
 ```
+</br></br>
 
 ## Keybind
 | Keymaps                                                            | Action                                  |
