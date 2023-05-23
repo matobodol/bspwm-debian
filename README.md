@@ -1,4 +1,4 @@
-# Setup bspwm di Debian netinst fresh install
+# Setup Bspwm di Debian Netinst Fresh Install
 
 ### Screenshot
 <img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
@@ -30,26 +30,26 @@ iface nama_interface inet dhcp
 xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-video-intel xserver-xorg-input-libinput 
 ```
 
-### Requiremen
+### Membutuhkan
 * core
 ```bash
 bspwm sxhkd rofi polybar dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev
 alsa-utils pulseaudio pulseaudio-utils lxpolkit
 ```
-* utilitas
+* utilitas (recomeded)
 ```bash
 cmus thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m
 ```
-* optional cli packages
+* aplikasi cli (optional)
 ```bash
-mpv htop neofetch qt5ct qt5-style-plugins qt5ct qt5-style-plugins xclip thermald
+mpv neovim htop neofetch qt5ct qt5-style-plugins qt5ct qt5-style-plugins xclip thermald
 ```
-* optional gui packages
+* aplikasi gui (optional)
 ```bash
-geany firefox-esr parole viwenior lxappearance nitrogen xfce4-power-manager 
+firefox-esr geany parole viwenior lxappearance nitrogen xfce4-power-manager 
 ```
 
-### Network
+### Network Manager iwd (optional)
 * install iwd
 ```bash
 sudo apt install iwd
@@ -70,27 +70,37 @@ systemctl restart iwd
 echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingService=systemd\n" | sudo tee /etc/iwd/main.conf
 ```
 
-### Compositor
+### Compositor (optional)
 * **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
 
-### **Installation**
+## Cara Install
 * **clone bspwm-debian dotfile**
 ```bash
-cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
+git clone https://github.com/matobodol/bspwm-debian.git && cd bspwm-debian
 ```
 * **uncompress icons**
 ```bash
-cd bspwm-debian/.icons && tar -Jxvf icons.tar.xz ; rm -f icons.tar.xz
+cd .icons && tar -Jxvf icons.tar.xz
+```
+```bash
+tar -Jxvf cursor.tar.xz
+```
+```bash
+rm *.tar.xz
 ```
 * **uncompress themes**
 ```bash
-cd ../.themes && tar -Jxvf themes.tar.xz ; rm -f themes.tar.xz
+cd ../.themes && tar -Jxvf themes.tar.xz ; rm themes.tar.xz
 ```
 * **uncompress fonts**
 ```bash
-cd ../.fonts && tar -Jxvf fonts.tar.xz ; rm -f fonts.tar.xz
+cd ../.fonts && tar -Jxvf fonts.tar.xz ; rm fonts.tar.xz
 ```
-* **copy dotfile to home directory**
+* **Hapus folder .git dan file README.md**
+```bash
+rm -rf .git README.md
+```
+* **copy dotfile ke home directory**
 ```bash
 cd .. && cp -rf . $HOME
 ```
@@ -99,21 +109,21 @@ cd .. && cp -rf . $HOME
 fc-cache -rv
 ```
 
-## Tap to click
+## Aktifkan tap to click pada touchpad
 add to /etc/X11/xorg.conf.d/30-touchpad.conf
 ```bash
 Section "InputClass"
-        Identifier "touchpad"
-        MatchIsTouchpad "on"
-        Driver "libinput"
-        Option "Tapping" "on"
-        Option "NaturalScrolling" "on"
-        Option "ScrollMethod" "twofinger"
+	Identifier "touchpad"
+	MatchIsTouchpad "on"
+	Driver "libinput"
+	Option "Tapping" "on"
+	Option "NaturalScrolling" "on"
+	Option "ScrollMethod" "twofinger"
 EndSection
 ```
 
 ## Keybind
-| Key                                                                | Action                                  |
+| Keymaps                                                            | Action                                  |
 | ------------------------------------------------------------------ | --------------------------------------- |
 | super + a                                                          | Switch to light/dark theme (Toggle)     |
 | super + shift + Return                                             | Rofi app launcher                       |
