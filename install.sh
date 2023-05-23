@@ -49,7 +49,7 @@ install_packages() {
 	# x11 minimal
 	PACKAGES+='xserver-xorg-core xserver-xorg-input-libinput xserver-xorg-video-intel x11-xserver-utils x11-xkb-utils x11-utils xinit '
 	# core
-	PACKAGES+='bspwm sxhkd rofi polybar dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils lxpolkit '
+	PACKAGES+='bspwm sxhkd rofi polybar brightnessctl dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils lxpolkit '
 	# utilitas
 	PACKAGES+='thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m cmus'
 	
@@ -130,7 +130,7 @@ setup_iwd(){
 ## touchpad driver
 tap_to_click() {
 if ! [[ -f  /etc/X11/xorg.conf.d/30-touchpad.conf ]]; then
-cat <<EOF | sudo tee > /etc/X11/xorg.conf.d/30-touchpad.conf
+cat <<EOF | sudo tee -a /etc/X11/xorg.conf.d/30-touchpad.conf
 Section "InputClass"
 	Identifier "touchpad"
 	MatchIsTouchpad "on"
@@ -211,7 +211,9 @@ case $menu in
 	;;
 	setup_touchpad*)
 		tap_to_click
-		if [[ $? -eq 0 ]]; then
+		if [[ $(sed -n '/Section/p' /etc/X11/xorg.conf.d/30-touchpad.conf) ]]; then
+			echo "touchpad sudah terconfigurasi."
+		elif [[ $? -eq 0 ]]; then
 			clear
 			echo "setup touchpad selesai."
 		fi
