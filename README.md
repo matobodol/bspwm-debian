@@ -35,8 +35,7 @@ xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-v
 ## Membutuhkan
 * core
 ```bash
-bspwm sxhkd rofi polybar dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev
-alsa-utils pulseaudio pulseaudio-utils lxpolkit
+bspwm sxhkd rofi polybar dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils lxpolkit
 ```
 * utilitas (recomeded)
 ```bash
