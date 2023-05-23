@@ -4,7 +4,7 @@
 <img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
 <img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/></br></br>
 
-## Menghubungkan ke wifi
+# Menghubungkan Ke Wifi
 > * melihat nama interface
 ```bash
 # iw dev | awk '/Interface/ {print$2}'
@@ -25,10 +25,23 @@ iface nama_interface inet dhcp
 ```
 </br></br>
 
-## X11 minimal
-* saya merkomendasikan menginstall paket 'xorg' daripada X11 minimal.
+# Instal Menggunakan Script
+> * **clone bspwm-debian dotfile**
 ```bash
-xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-video-intel xserver-xorg-input-libinput 
+git clone https://github.com/matobodol/bspwm-debian.git && cd bspwm-debian
+```
+> * **jalankan script installer**
+```bash
+./install.sh
+```
+<br/><br/>
+
+# Instal Manual
+## X11 minimal
+> * saya merkomendasikan menginstall paket 'xorg' daripada X11 minimal. <br>
+!Note: jangan lupa sesuaikan dengan kartu vidoe milik anda. Disini saya menggunakan video intel
+```bash
+xserver-xorg-core xserver-xorg-video-intel xserver-xorg-input-libinput x11-utils x11-xkb-utils x11-xserver-utils xinit
 ```
 </br></br>
 
@@ -37,7 +50,7 @@ xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-v
 ```bash
 bspwm sxhkd rofi polybar dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils lxpolkit
 ```
-* utilitas (recomeded)
+* utilitas
 ```bash
 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m cmus
 ```
@@ -51,25 +64,25 @@ firefox-esr geany parole viwenior lxappearance nitrogen xfce4-power-manager
 ```
 </br></br>
 
-## Network Manager iwd (optional)
+## Network Manager iwd
 * install iwd
 ```bash
 sudo apt install iwd
 ```
-* disable services conflict
+* nonaktifkan layanan wpa_supplicant
 ```bash
 systemctl disable --now wpa_supplicant
 ```
-* enable iwd service
+* aktifkan layanan iwd.service
 ```bash
-systemctl enable --now iwd
+systemctl enable --now iwd.service
 ```
 ```bash
-systemctl restart iwd
+systemctl restart iwd.service
 ```
 * configure iwd
 ```bash
-echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingService=systemd\n" | sudo tee /etc/iwd/main.conf
+echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingService=systemd\n" | sudo tee -a /etc/iwd/main.conf
 ```
 </br></br>
 
