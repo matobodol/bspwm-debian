@@ -1,0 +1,16 @@
+#! /bin/bash
+
+source $HOME/.config/bspwm/globalrc
+
+pkill conky
+
+	voffset=$(($(echo $SCREEN | awk -F'x' '{print $2}') - 238))
+	currentvoffset=$(cat $HOME/.config/bspwm/conky/kidung_wingit | grep voffset | awk -F[}{] '{print $2}' | awk '{print $2}')
+
+	if [[ $currentvoffset -ne $voffset ]]; then
+		sed -i "22s/$currentvoffset\}/$voffset\}/" ~/.config/bspwm/conky/kidung_wingit
+	fi
+
+conky -c ~/.config/bspwm/conky/kidung_wingit &&
+
+exit 0

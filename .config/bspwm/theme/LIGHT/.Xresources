@@ -1,0 +1,83 @@
+! XTERM APPEARANCE
+XTerm.termName: xterm-256color
+XTerm*cursorBlink: false
+XTerm*cursorUnderline: false
+XTerm.locale: true
+XTerm.utf8: true
+XTerm.metaSendsEscape: true
+XTerm.backarrowKey: false
+XTerm.ttyModes: erase ^?
+XTerm.saveLines: 4096
+XTerm.scrollBar: false
+XTerm.geometry: 75x18
+
+xterm*faceName: FiraCode Nerd Font Mono
+xterm*faceSize: 10
+XTerm.renderFont: true
+XTerm*highlightSelection: true
+XTerm*BorderWidth: 20
+! XTerm.vt100.selectToClipboard
+
+XTerm*vt100.translations: #override \n\
+  Shift Ctrl <Key> C: copy-selection(CLIPBOARD) \n\
+  Shift Ctrl <Key> V: insert-selection(CLIPBOARD) \n\
+  Ctrl <Key> =: larger-vt-font() \n\
+	Ctrl <Key> -: smaller-vt-font()
+
+! URXVT APPEARANCE
+URxvt.font:                       xft:shuretechmono nerd font mono:size=10
+URxvt.geometry:                   75x18
+URxvt.internalBorder:             20
+URxvt.cursorBlink:                true
+URxvt.cursorUnderline:            true
+URxvt.scrollBar:                  false
+URxvt.saveline:                   5000
+URxvt.scrollstyle:                plain
+URxvt.urgentOnBell:               false
+URxvt.depth:                      24
+URxvt.iso14755:                   false
+
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.url-Launcher:               /usr/bin/firefox-esr
+URxvt.underlineURLs:              true
+URxvt.urlButton:                  1
+
+!COLOR SCHEME
+! special
+*.foreground:	#5c5c5c
+*.background:	#f3f3f3
+*.cursorColor:	#5c5c5c
+
+! black
+*.color0:       #515151
+*.color8:       #5c5c5c
+
+! red
+*.color1:       #ef5093
+*.color9:       #ef3080
+
+! green
+*.color2:       #68e09b
+*.color10:      #2ae077
+
+! yellow
+*.color3:       #ffb630
+*.color11:      #f0a412
+
+! blue
+*.color4:       #5294e2
+*.color12:      #9bbbff
+
+! magenta
+*.color5:       #7e57c2
+*.color13:      #977fc2
+
+! cyan
+*.color6:       #51cdff
+*.color14:      #1dbdff
+
+! white
+*.color7:       #f3f3f3
+*.color15:      #f0f0f0

@@ -1,0 +1,145 @@
+# Setup bspwm di Debian netinst fresh install
+
+# MY BSPWM SETUP
+<img src="/img/light1.png" alt="light1" width="400"/> <img src="/img/light2.png" alt="light2" width="400"/>
+<img src="/img/dark1.png" alt="dark1" width="400"/> <img src="/img/dark2.png" alt="dark2" width="400"/>
+
+### Menghubungkan ke wifi
+* melihat nama interface
+```bash
+# iw dev | awk '/Interface/ {print$2}'
+# ip link set $interface up
+```
+* edit file /etc/network/interfaces dan tambahkan baris dibawah: </br>
+!Note: Jangan lupa sesuaikan nama_interface, nama_wifi, dan pasword_wifi
+```bash
+allow-hotplug nama_interface
+iface nama_interface inet dhcp
+	wpa-ssid nama_wifi
+	wpa-psk password_wifi
+	wpa-scan-ssid 1
+```
+* aktifkan koneksi
+```bash
+# ifup nama_interface
+```
+
+### X11 minimal
+* saya merkomendasikan menginstall paket 'xorg' daripada X11 minimal.
+```bash
+xserver-xorg-core x11-xserver-utils x11-xkb-utils x11-utils xinit xserver-xorg-video-intel xserver-xorg-input-libinput 
+```
+
+### Requiremen
+* core
+```bash
+bspwm sxhkd rofi polybar dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev
+alsa-utils pulseaudio pulseaudio-utils lxpolkit
+```
+* utilitas
+```bash
+cmus thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m
+```
+* optional cli packages
+```bash
+mpv htop neofetch qt5ct qt5-style-plugins qt5ct qt5-style-plugins xclip thermald
+```
+* optional gui packages
+```bash
+geany firefox-esr parole viwenior lxappearance nitrogen xfce4-power-manager 
+```
+
+### Network
+* install iwd
+```bash
+sudo apt install iwd
+```
+* disable services conflict
+```bash
+systemctl disable --now wpa_supplicant
+```
+* enable iwd service
+```bash
+systemctl enable --now iwd
+```
+```bash
+systemctl restart iwd
+```
+* configure iwd
+```bash
+echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingService=systemd\n" | sudo tee /etc/iwd/main.conf
+```
+
+### Compositor
+* **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**
+
+### **Installation**
+* **clone bspwm-debian dotfile**
+```bash
+cd ~/Download && git clone https://github.com/matobodol/bspwm-debian
+```
+* **uncompress icons**
+```bash
+cd bspwm-debian/.icons && tar -Jxvf icons.tar.xz ; rm -f icons.tar.xz
+```
+* **uncompress themes**
+```bash
+cd ../.themes && tar -Jxvf themes.tar.xz ; rm -f themes.tar.xz
+```
+* **uncompress fonts**
+```bash
+cd ../.fonts && tar -Jxvf fonts.tar.xz ; rm -f fonts.tar.xz
+```
+* **copy dotfile to home directory**
+```bash
+cd .. && cp -rf . $HOME
+```
+* **refresh cache fonts**
+```bash
+fc-cache -rv
+```
+
+## Tap to click
+add to /etc/X11/xorg.conf.d/30-touchpad.conf
+```bash
+Section "InputClass"
+        Identifier "touchpad"
+        MatchIsTouchpad "on"
+        Driver "libinput"
+        Option "Tapping" "on"
+        Option "NaturalScrolling" "on"
+        Option "ScrollMethod" "twofinger"
+EndSection
+```
+
+## Keybind
+| Key                                                                | Action                                  |
+| ------------------------------------------------------------------ | --------------------------------------- |
+| super + a                                                          | Switch to light/dark theme (Toggle)     |
+| super + shift + Return                                             | Rofi app launcher                       |
+| super + {Return,u}                                                 | Open terminal xterm                     |
+| super + shift + {z,x}                                              | Windows {Close,kill}                    |
+| super + :arrow_up: :arrow_down: :arrow_left: :arrow_right:         | Move window floating                    |
+| super + alt + :arrow_up: :arrow_down: :arrow_left: :arrow_right:   | Resize window floating                  |
+| super + alt + {h,j,k,l}                                            | Resize window tiling                    |
+| super + {h,j,k,l}                                                  | Change node focus                       |
+| super + shift + {h,j,k,l}                                          | Move active windows                     |
+| super + shift + Space                                              | Scratchpad: hide window                 |
+| super + space                                                      | Scratchpad: show window                 |
+| super + {1,2,3,4,5,}                                               | Swap workspace                          |
+| super + shift + {1,2,3,4,5,}                                       | Move active windows to workspace        |
+| super + z                                                          | Musik player cmus                       |
+| super + {equal,minus}                                              | Focus the next/previous window          |
+| super + shift + {equal,minus}                                      | Focus the older or newer node           |
+| super + XF86MonBrightness{Up,Down}                                 | Set brightness                          |
+| super + XF86Audio{RaiseVolume,LowerVolume,Mute}                    | Set audio volume                        |
+| super + shift + {s,b}                                              | Open config {sxhkdrc,bspwmrc}           |
+| super + Delete                                                     | Lock screen                             |
+| {Print,super + Print,super + shift + print}                        | Screenshot: menu,focused,include pointer|
+| super + {_,shift + }End                                            | Wifi (iwd) {connnect,forget network}    |
+| super + shift + Delete                                             | Power menu                              |
+| super + alt + {r,q}                                                | WM {Restart,Quit}                       |
+
+
+
+

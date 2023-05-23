@@ -1,0 +1,63 @@
+# GLOBAL VARIABEL, DO NOT EDIT
+
+# hardware
+SCREEN=1366x768
+BRIGHTNESS=30%
+VOLUME=30%
+
+# global theme
+THEME=DARK
+ICON=$HOME/.config/bspwm/theme/${THEME}/icons
+
+# GTK THEME LIGHT
+if [[ $THEME == 'LIGHT' ]]; then
+	gtkTheme=MonoTheme
+	iconTheme=Papirus-Light
+	cursorTheme=Bibata-Modern-Classic
+	
+# GTK THEME DARK
+elif [[ $THEME == 'DARK' ]]; then
+	#gtkTheme=MonoThemeDark
+	gtkTheme=Nordic-darker
+	iconTheme=Papirus-Dark
+	cursorTheme=Bibata-Modern-Ice
+fi
+
+# Color Schemes
+light=#DCDCDC
+dark=#3B4252
+black=#252A34
+white=#F0F0F0
+magenta=#B379F2
+red=#FF80C3
+cyan=#64D1E0
+panelForgroundLight=#99A0AD
+conkyForgroundLight=#F8FF00
+panelForgroundDark=#99A0AD
+conkyForgroundDark=#2be3fc
+
+# Notifier Directory 
+NOTIFY=$HOME/.config/bspwm/scripts/notify-send.sh
+
+# Power Menu Command
+SHUTDOWN="systemctl poweroff"							#systemd default
+REBOOT="systemctl reboot"									#systemd default
+SLEEP="systemctl suspend"									#systemd default
+LOCK="$HOME/.config/bspwm/lock.sh"				#i3lock
+LOGOUT="bspc quit"												#bspwm default
+
+Lock() {
+	sleep 0.1; $LOCK
+}
+Logout() {
+	$HOME/.config/bspwm/launcher/powermenu/promptmenu.sh -y "$LOGOUT" -q "     Logout ?"
+}
+Sleep() {
+	$HOME/.config/bspwm/launcher/powermenu/promptmenu.sh -y "$SLEEP" -q "      Sleep ?"
+}
+Reboot() {
+	$HOME/.config/bspwm/launcher/powermenu/promptmenu.sh -y "$REBOOT" -q "    Reboot ?"
+}
+Shutdown() {
+	$HOME/.config/bspwm/launcher/powermenu/promptmenu.sh -y "$SHUTDOWN" -q "  Shutdown ?"
+}

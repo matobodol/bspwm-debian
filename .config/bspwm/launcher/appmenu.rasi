@@ -1,0 +1,73 @@
+/**/
+configuration {
+	drun-display-format:		"   {name}";
+	disable-history:		false;
+	fullscreen:			false;
+	hide-scrollbar:			true;
+	sidebar-mode:			false;
+	font:				"ShareTech Regular 12";
+	display-drun:			"Apps : ";
+	display-run:			"Run : ";
+	display-window:			"Running Apps";
+	modi:				"drun,run,window,Power menu :~/.config/bspwm/launcher/favorit.sh";
+}
+@import "color-scheme.rasi"
+* {
+
+	background-color:		@background;
+	text-color:			@foreground;
+	columns:			1;
+	lines:				5;
+	x-offset:			15px;
+	y-offset:			44px;
+}
+
+window {
+	width:				40%;
+	location:			center;
+	anchor:				south;
+}
+
+mainbox {
+	background-color: @bg-mainbox;
+	//background-image: url("img/tshirt.png");
+}
+
+prompt {
+	padding:	3px 0px 3px 20px;
+	text-color:	@foreground;
+}
+
+entry {
+	text-color:	@foreground;
+	padding:	3px 0px;
+}
+
+inputbar {
+	margin:		45px 100px 20px 100px;
+	padding:	2px;
+	border-radius:	20px;
+}
+
+listview {
+	padding:	10px 50px 40px;
+}
+
+element {
+	padding:	3px 15px;
+}
+
+element selected  normal {
+	text-color:	@fgselected;
+	background-color:	@bgselected;
+	border-radius:	5px;
+}
+
+error-message {
+	expand:		true;
+	border:		8px;
+	border-radius:	8px; 
+	border-color:	green;
+	padding:	10px;
+}
+

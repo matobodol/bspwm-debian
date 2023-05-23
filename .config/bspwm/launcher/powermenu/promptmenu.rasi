@@ -1,0 +1,87 @@
+/*
+*/
+configuration {
+show-icons: true;
+}
+@import "~/.config/bspwm/launcher/color-scheme.rasi"
+* {
+  on:               #2be491;
+  off:              #dddddd;
+  
+  text-font:                            "ShareTech Regular 19";
+  icon-font:                            "feather 25";
+
+  option-6-listview-spacing:            25px;
+
+  // top right bottom left
+  menu-window-padding:                  6px 6px 6px 30px;
+  menu-prompt-padding:                  10px 20px 25px 15px;
+  menu-prompt-margin:                    0px;
+  menu-element-border:                   0px 10px 0px 10px;
+  menu-element-padding:                 20px 10px 20px -35px;
+}
+
+#window {
+  width: 230px;
+  height: 180px;
+  location: center;
+  border: 0px;
+}
+
+* {
+  background-color: @background;
+  text-color: @foreground-light;
+  font: @icon-font;
+  location: center;
+}
+
+#horibox {
+  children: [ listview ];
+}
+
+#listview {
+  layout: horizontal;
+}
+
+#element {
+  border: 0px;
+  padding: @option-element-padding;
+  background-color: @background-light;
+  border-radius: 8px;
+  font: @icon-font;
+  border: @menu-element-border;
+  padding: @menu-element-padding;
+  border-color: @background-light;
+}
+
+#element.selected {
+  background-color: @accent;
+  text-color: @fgselected;
+  border-color: @accent;
+}
+
+#window {
+  padding: @menu-window-padding;
+  children: [ inputbar, horibox ];
+}
+
+#inputbar {
+  children: [ prompt ];
+  margin: @menu-inputbar-margin;
+}
+
+#listview {
+  spacing: @option-6-listview-spacing;
+  lines: 2;
+}
+
+prompt {
+  padding: @menu-prompt-padding;
+}
+
+#prompt {
+  margin: @menu-prompt-margin;
+  background-color: @background;
+  text-color: @foreground-light;
+  font: @text-font;
+}

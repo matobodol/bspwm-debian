@@ -1,0 +1,88 @@
+! XTERM APPEARANCE
+XTerm.termName: xterm-256color
+XTerm*cursorBlink: true
+XTerm*cursorUnderline: true
+XTerm.locale: true
+XTerm.utf8: true
+XTerm.metaSendsEscape: true
+XTerm.backarrowKey: false
+XTerm.ttyModes: erase ^?
+XTerm.saveLines: 4096
+XTerm.scrollBar: false
+XTerm.geometry: 75x18
+
+xterm*faceName: FiraCode Nerd Font Mono
+xterm*faceSize: 11
+XTerm.renderFont: true
+XTerm*highlightSelection: true
+XTerm*BorderWidth: 20
+! XTerm.vt100.selectToClipboard
+
+XTerm*vt100.translations: #override \n\
+  Shift Ctrl <Key> C: copy-selection(CLIPBOARD) \n\
+  Shift Ctrl <Key> V: insert-selection(CLIPBOARD) \n\
+  Ctrl <Key> =: larger-vt-font() \n\
+	Ctrl <Key> -: smaller-vt-font()
+	
+	
+! URXVT APPEARANCE
+URxvt*termName:                   rxvt-unicode
+URxvt.font:                       xft:shuretechmono nerd font mono:size=12
+URxvt.geometry:                   75x18
+URxvt.internalBorder:             20
+URxvt.cursorBlink:                true
+URxvt.cursorUnderline:            true
+URxvt.scrollBar:                  false
+URxvt.saveline:                   5000
+URxvt.scrollstyle:                plain
+URxvt.urgentOnBell:               false
+URxvt.depth:                      24
+URxvt.iso14755:                   false
+
+! Copy paste
+Urxvt.keysym.Shift-Control-V: eval:paste_clipboard
+Urxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.url-Launcher:               /usr/bin/firefox-esr
+URxvt.underlineURLs:              true
+URxvt.urlButton:                  1
+
+! COLOR SCHEME
+*.cursorColor:  #F3F3F3
+*.foreground: #F8F8F2
+*.background:#282A36
+! *.background: #252A34
+
+! BLACK
+*.color0:     #000000
+*.color8:     #6272A4
+
+! PINK
+*.color1:     #FF79C6
+*.color9:     #FF92D0
+
+! GREEN
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+
+! ORANGE
+*.color3:     #FFB86C
+*.color11:    #FFB86C
+
+! BLUE
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+
+! YELLOW
+*.color5:     #F1FA8C
+*.color13:    #F4F99D
+
+! CYAN
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+
+! WHITE
+*.color7:     #FFFFFF
+*.color15:    #EFF1FF
+
+
