@@ -191,7 +191,7 @@ optional_packages(){
 	
 	# install uget-integrator
 	. $(dirname $(realpath $0))/uget-integrator/install_uget_integrator.sh
-	#info_msg 'setup uget-integrator, gagal.'
+	info_msg 'setup uget-integrator, gagal.'
 }
 
 main_menu(){
