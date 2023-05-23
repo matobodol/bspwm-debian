@@ -46,48 +46,48 @@ xserver-xorg-core xserver-xorg-video-intel xserver-xorg-input-libinput x11-utils
 </br></br>
 
 ## Membutuhkan
-* core
+> * core
 ```bash
 bspwm sxhkd rofi polybar dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils lxpolkit
 ```
-* utilitas
+> * utilitas
 ```bash
 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m cmus
 ```
-* aplikasi cli (optional)
+> * aplikasi cli (optional)
 ```bash
 mpv neovim htop neofetch qt5ct qt5-style-plugins xclip thermald
 ```
-* aplikasi gui (optional)
+> * aplikasi gui (optional)
 ```bash
 firefox-esr geany parole viwenior lxappearance nitrogen xfce4-power-manager 
 ```
 </br></br>
 
 ## Network Manager iwd
-* install iwd
+> * install iwd
 ```bash
 sudo apt install iwd
 ```
-* nonaktifkan layanan wpa_supplicant
+> * nonaktifkan layanan wpa_supplicant
 ```bash
 systemctl disable --now wpa_supplicant
 ```
-* aktifkan layanan iwd.service
+> * aktifkan layanan iwd.service
 ```bash
 systemctl enable --now iwd.service
 ```
 ```bash
 systemctl restart iwd.service
 ```
-* configure iwd
+> * configure iwd
 ```bash
 echo -e "[General]\nEnableNetworkConfiguration=true\n\n[Network]\nNameResolvingService=systemd\n" | sudo tee -a /etc/iwd/main.conf
 ```
 </br></br>
 
 ## Compositor (optional)
-* **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br></br></br>
+> * **Picom** **[yshui/picom: A lightweight compositor for X11 - GitHub](https://github.com/yshui/picom)**</br></br></br>
 
 # CARA INSTALL
 > * **clone bspwm-debian dotfile**
@@ -127,7 +127,7 @@ fc-cache -rv
 </br></br>
 
 ## Aktifkan tap to click pada touchpad
-add to /etc/X11/xorg.conf.d/30-touchpad.conf
+> add to /etc/X11/xorg.conf.d/30-touchpad.conf
 ```bash
 Section "InputClass"
 	Identifier "touchpad"
