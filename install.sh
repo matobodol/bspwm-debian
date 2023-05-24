@@ -1,26 +1,27 @@
 #!/bin/bash
-# Setup Bspwm On Debian Netinst Fresh Install
+# Setup Bspwm On Debian Netinst Fresh Install (statdard system utilities only)
 
 #pesan error
 info_msg() {
 	# jika exit code dari proses sebelumnya bukan bernilai 0
 	if [[ $? -ne 0 ]]; then
-		clear
 		local msg=$1
+		clear
 		echo "$msg"
 		exit 1
 	fi
 }
 
 install_dotfiles(){
-	# membuat hirarki user direktory
+	# update xdg folder user
 	xdg-user-dirs-update
 	info_msg 'xdg-user-dirs-update, gagal'
 	
 	# copy dotfile ke home direktory
 	cp -rf {.config,.fonts,.icons,.themes/} $HOME/
 	info_msg 'copying dotfiles ke direktori home gagal.'
-	# extrak fonts
+
+# extrak fonts
 	cd $HOME/.fonts && tar -Jxvf fonts.tar.xz
 	info_msg 'Ekstrak fonts.tar.xz gagal'
 	rm fonts.tar.xz
@@ -45,10 +46,13 @@ install_dotfiles(){
 install_packages() {
 	local PACKAGES=''
 	PACKAGES+='sudo '
+	
 	# x11 minimal
 	PACKAGES+='xserver-xorg-core xserver-xorg-input-libinput xserver-xorg-video-intel x11-xserver-utils x11-xkb-utils x11-utils xinit '
+	
 	# core
 	PACKAGES+='bspwm sxhkd rofi polybar brightnessctl dunst conky xterm scrot i3lock feh imagemagick w3m xsettingsd xdotool libnotify-bin libglib2.0-dev alsa-utils pulseaudio pulseaudio-utils lxpolkit '
+	
 	# utilitas
 	PACKAGES+='thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman ffmpegthumbnailer tumbler w3m cmus'
 	
@@ -97,7 +101,7 @@ setup_iwd(){
 		read -p "Nama Wifi: " SSID
 		echo -e "Kosongkan jika wifi tidak dipassword\n dengan langsung tekan Enter"
 		read -p "Password: " PSK
-	
+		
 		# menghubungkan ke ssid terbuka
 		iwctl station ${interfaceName} connect "${SSID}" --passphrase "${PSK}" &>/dev/null
 		# jika gagal, menghubungkan ke ssid tersembunyi
@@ -146,13 +150,9 @@ fi
 
 ## install picom
 install_picom(){
-	# install builder
-	sudo apt install -y build-essential
-	info_msg 'install build-essential, gagal'
-
 	# install dependensi picom
 	local PACKAGES=''
-	PACKAGES+='libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson '
+	PACKAGES+='build-essential libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson '
 	PACKAGES+='libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-glx0-dev libpixman-1-dev libxcb-render0-dev '
 	PACKAGES+='libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev '
 	sudo apt install -y ${PACKAGES}
@@ -179,26 +179,11 @@ install_picom(){
 	fi
 }
 
-optional_packages(){
-	local PACKAGES=''
-	# cli packages
-	PACKAGES+='curl htop neofetch build-essential '
-	# gui packages
-	PACKAGES+='firefox-esr geany parole viewnior uget'
-
-	sudo apt install -y ${PACKAGES}
-	info_msg 'instal optional_packages, gagal.'
-	
-	# install uget-integrator
-	. $(dirname $(realpath $0))/uget-integrator/install_uget_integrator.sh
-	info_msg 'setup uget-integrator, gagal.'
-}
-
 main_menu(){
-
 	option=(\
 	'setup_bspwm' ': Untuk install dotfiles'\ 
 	'setup_picom' ': Untuk install compositor picom'\ 
+	'optional' ': Untuk install optional packages'\ 
 	'setup_touchpad  ' ': Untuk mengaktifkan tap to click'\ 
 	)
 	menu=$(whiptail --menu 'Pilih Menu : ' --title 'Setup Bspwm On Debian' 12 80 0 "${option[@]}" 3>&1 1>&2 2>&3)
@@ -215,7 +200,7 @@ main_menu(){
 				fi
 				
 				clear
-				echo "install dotfiles selesai. Mohon relogin kemudian"
+				echo "install dotfiles selesai. Mohon restart kemudian"
 				echo "untuk masuk ke bspwm ketik: wm"
 				sudo systemctl restart iwd.services
 			fi
@@ -226,6 +211,9 @@ main_menu(){
 				clear
 				echo "install selesai. Restart bspwm untuk menerapkan efek"
 			fi
+		;;
+		optional)
+			optional_packages
 		;;
 		setup_touchpad*)
 			tap_to_click
@@ -239,9 +227,43 @@ main_menu(){
 	esac
 }
 
+optional_packages() {
+	# daftar menu menggunakan array
+	local -a options=(
+		# packages gui
+		firefox-esr ": Browser" on \
+		chromium ": Browser" off \
+		uget ": Download manager" on \
+		geany ": Text editor" on \
+		parole ": Video player" on \
+		viewnior ": Image viewer" on \
+		
+		#packages cli
+		build-essential ": builder" on \
+		htop ": system monitor (cli)    " on \
+		neofetch ": system info (cli)" on \
+	)
+	
+	local msg="\nSelect Optional Packages."
+	# menampilkan daftar menu ke layar menggunakan whiptail
+	local PACKAGES=$(whiptail --separate-output --title "TOOLS AND UTILITIES" \
+		--checklist "$msg" 20 55 10 "${options[@]}" 3>&1 1>&2 2>&3
+	)
+	
+	# install menu-menu yg dipilih
+	if [[ -n $PACKAGES ]]; then
+		sudo apt install $PACKAGES
+		info_msg 'install optional_packages, gagal'
+	fi
+	# jika uget diinstall
+	if [[ $(echo $PACKAGES | grep uget) ]]; then
+		$(dirname $(realpath $0))/uget-integrator/install_uget_integrator.sh
+		info_msg 'setup uget-integrator, gagal.'
+	fi
+}
+
 if [[ $1 == 'opt' ]]; then
 	optional_packages
 else
 	main_menu
 fi
-
